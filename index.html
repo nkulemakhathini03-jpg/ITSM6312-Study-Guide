@@ -1,0 +1,1996 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ITSM6312 – IT Service Management Master Study Guide</title>
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --bg-alt: #0f1526;
+    --card: #141b2e;
+    --card-hover: #1a2338;
+    --border: #1e2a45;
+    --cyan: #00d4ff;
+    --cyan-dim: #0099cc;
+    --green: #00e676;
+    --green-dim: #00b359;
+    --purple: #7c3aed;
+    --orange: #ff9100;
+    --pink: #ff4081;
+    --text: #e8eef7;
+    --muted: #8899b0;
+    --success: #00e676;
+    --danger: #ff5252;
+    --warning: #ffc107;
+    --code-bg: #0d1320;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.75;
+    overflow-x: hidden;
+  }
+  /* === HEADER === */
+  header {
+    background: linear-gradient(135deg, #0a0e1a 0%, #0f1a35 50%, #001a33 100%);
+    padding: 3.5rem 1.5rem;
+    text-align: center;
+    border-bottom: 2px solid var(--cyan);
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle at 30% 50%, rgba(0,212,255,0.08) 0%, transparent 60%),
+                radial-gradient(circle at 70% 50%, rgba(0,230,118,0.06) 0%, transparent 60%);
+    animation: pulse 8s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.05); opacity: 1; }
+  }
+  header h1 {
+    font-size: 2.8rem;
+    background: linear-gradient(90deg, var(--cyan), var(--green), var(--cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+    position: relative;
+    z-index: 1;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+  header p { color: var(--muted); font-size: 1.1rem; position: relative; z-index: 1; }
+  .badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--cyan), var(--green));
+    color: #0a0e1a;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    margin-top: 1rem;
+    font-weight: 700;
+    position: relative;
+    z-index: 1;
+    letter-spacing: 0.5px;
+  }
+  /* === NAV === */
+  nav {
+    position: sticky;
+    top: 0;
+    background: rgba(10, 14, 26, 0.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0.7rem;
+    z-index: 1000;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.4rem;
+  }
+  nav a {
+    color: var(--text);
+    text-decoration: none;
+    padding: 0.45rem 0.9rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+    font-weight: 500;
+  }
+  nav a:hover { background: var(--cyan); color: #0a0e1a; border-color: var(--cyan); font-weight: 700; }
+  /* === MAIN === */
+  main { max-width: 1150px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+  section { margin-bottom: 3.5rem; scroll-margin-top: 70px; }
+  h2 {
+    font-size: 1.9rem;
+    color: var(--cyan);
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 0.6rem;
+    margin-bottom: 1.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  h2::before {
+    content: '';
+    width: 6px;
+    height: 28px;
+    background: linear-gradient(180deg, var(--cyan), var(--green));
+    border-radius: 3px;
+  }
+  h3 { color: var(--green); margin: 1.8rem 0 0.9rem; font-size: 1.35rem; }
+  h4 { color: var(--orange); margin: 1.2rem 0 0.6rem; font-size: 1.1rem; }
+  p { margin-bottom: 1rem; }
+  ul, ol { margin-left: 1.6rem; margin-bottom: 1rem; }
+  li { margin-bottom: 0.45rem; }
+  strong { color: var(--cyan); }
+  /* === CARDS === */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    transition: all 0.25s;
+  }
+  .card:hover { border-color: var(--cyan); background: var(--card-hover); }
+  /* === DIAGRAMS === */
+  .diagram {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    text-align: center;
+    overflow-x: auto;
+  }
+  .diagram svg { max-width: 100%; height: auto; }
+  .diagram-caption {
+    color: var(--muted);
+    font-size: 0.85rem;
+    font-style: italic;
+    margin-top: 0.8rem;
+  }
+  /* === TABLES === */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.92rem;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  th {
+    background: linear-gradient(135deg, #003d5c, #005580);
+    color: var(--cyan);
+    padding: 0.75rem;
+    text-align: left;
+    font-weight: 700;
+    border-bottom: 2px solid var(--cyan);
+  }
+  td {
+    padding: 0.7rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tr:hover td { background: #1a2338; }
+  /* === CALLOUTS === */
+  .note {
+    background: rgba(0, 212, 255, 0.08);
+    border-left: 4px solid var(--cyan);
+    padding: 1rem 1.2rem;
+    border-radius: 0 8px 8px 0;
+    margin: 1rem 0;
+  }
+  .note strong { color: var(--cyan); }
+  .example {
+    background: rgba(255, 145, 0, 0.08);
+    border-left: 4px solid var(--orange);
+    padding: 1rem 1.2rem;
+    border-radius: 0 8px 8px 0;
+    margin: 1rem 0;
+  }
+  .example strong { color: var(--orange); }
+  .simplified {
+    background: rgba(0, 230, 118, 0.08);
+    border-left: 4px solid var(--green);
+    padding: 1rem 1.2rem;
+    border-radius: 0 8px 8px 0;
+    margin: 1rem 0;
+  }
+  .simplified strong { color: var(--green); }
+  .key-point {
+    background: rgba(124, 58, 237, 0.12);
+    border: 1px solid var(--purple);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+  }
+  /* === DETAILS === */
+  details {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    transition: all 0.25s;
+  }
+  details:hover { border-color: var(--cyan-dim); }
+  summary {
+    padding: 1rem 1.3rem;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--text);
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::after {
+    content: '+';
+    font-size: 1.6rem;
+    color: var(--cyan);
+    transition: transform 0.25s;
+    font-weight: 300;
+    line-height: 1;
+  }
+  details[open] summary::after { transform: rotate(45deg); }
+  details[open] summary { border-bottom: 1px solid var(--border); background: var(--bg-alt); }
+  details > div { padding: 1.3rem; }
+  /* === QUIZ === */
+  .quiz-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .quiz-score {
+    background: linear-gradient(135deg, var(--cyan), var(--green));
+    color: #0a0e1a;
+    padding: 0.5rem 1.2rem;
+    border-radius: 20px;
+    font-weight: 800;
+    font-size: 0.95rem;
+  }
+  .question {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.3rem;
+    margin-bottom: 1.2rem;
+  }
+  .question p.q-text { font-weight: 600; margin-bottom: 0.9rem; color: var(--text); font-size: 1rem; }
+  .option {
+    display: block;
+    padding: 0.7rem 1rem;
+    margin: 0.45rem 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--bg-alt);
+    font-size: 0.92rem;
+  }
+  .option:hover { border-color: var(--cyan); background: var(--card-hover); transform: translateX(4px); }
+  .option input { margin-right: 0.7rem; accent-color: var(--cyan); }
+  .option.correct { border-color: var(--success); background: rgba(0, 230, 118, 0.12); }
+  .option.wrong { border-color: var(--danger); background: rgba(255, 82, 82, 0.12); }
+  .feedback {
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    margin-top: 0.7rem;
+    display: none;
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+  .feedback.show { display: block; animation: fadeIn 0.3s; }
+  .feedback.correct { background: rgba(0, 230, 118, 0.12); color: var(--success); border: 1px solid var(--success); }
+  .feedback.wrong { background: rgba(255, 82, 82, 0.12); color: var(--danger); border: 1px solid var(--danger); }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+  /* === BUTTONS === */
+  button {
+    background: linear-gradient(135deg, var(--cyan), var(--cyan-dim));
+    color: #0a0e1a;
+    border: none;
+    padding: 0.75rem 1.6rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 700;
+    transition: all 0.2s;
+    margin: 0.3rem;
+    letter-spacing: 0.3px;
+  }
+  button:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0, 212, 255, 0.4); }
+  button.secondary {
+    background: transparent;
+    border: 2px solid var(--cyan);
+    color: var(--cyan);
+  }
+  button.secondary:hover { background: var(--cyan); color: #0a0e1a; }
+  button.green { background: linear-gradient(135deg, var(--green), var(--green-dim)); }
+  button.purple { background: linear-gradient(135deg, var(--purple), #5b21b6); color: white; }
+  /* === EXAM HEADER === */
+  .exam-header {
+    background: linear-gradient(135deg, #001a33, #003d5c, #005580);
+    padding: 2.5rem;
+    border-radius: 14px;
+    text-align: center;
+    margin-bottom: 2rem;
+    border: 2px solid var(--cyan);
+    position: relative;
+    overflow: hidden;
+  }
+  .exam-header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(circle at 20% 50%, rgba(0,212,255,0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(0,230,118,0.1) 0%, transparent 50%);
+  }
+  .exam-header h2 { color: white; border: none; margin-bottom: 0.5rem; justify-content: center; position: relative; z-index: 1; }
+  .exam-header h2::before { display: none; }
+  .exam-header p { color: rgba(255,255,255,0.9); margin: 0; position: relative; z-index: 1; }
+  .marks {
+    display: inline-block;
+    background: rgba(0, 212, 255, 0.2);
+    padding: 0.2rem 0.7rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    margin-left: 0.5rem;
+    color: var(--cyan);
+    font-weight: 700;
+  }
+  /* === TOC === */
+  .toc {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .toc h3 { margin-top: 0; color: var(--cyan); }
+  .toc ul { list-style: none; margin-left: 0; }
+  .toc li { margin: 0.6rem 0; }
+  .toc a { color: var(--text); text-decoration: none; transition: all 0.2s; display: inline-block; }
+  .toc a:hover { color: var(--cyan); text-decoration: underline; transform: translateX(5px); }
+  /* === FOOTER === */
+  footer {
+    text-align: center;
+    padding: 2.5rem;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    font-size: 0.9rem;
+    background: var(--bg-alt);
+  }
+  /* === SCORE DISPLAY === */
+  .score-display {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    background: linear-gradient(135deg, var(--cyan), var(--green));
+    color: #0a0e1a;
+    padding: 1rem 1.5rem;
+    border-radius: 40px;
+    font-weight: 800;
+    box-shadow: 0 8px 30px rgba(0, 212, 255, 0.5);
+    z-index: 2000;
+    display: none;
+    font-size: 0.95rem;
+  }
+  .score-display.show { display: block; animation: slideIn 0.4s; }
+  @keyframes slideIn { from { transform: translateY(100px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+  /* === RESPONSIVE === */
+  @media (max-width: 700px) {
+    header h1 { font-size: 1.7rem; }
+    h2 { font-size: 1.4rem; }
+    main { padding: 1rem; }
+    nav a { font-size: 0.75rem; padding: 0.35rem 0.6rem; }
+    .score-display { bottom: 0.5rem; right: 0.5rem; font-size: 0.8rem; padding: 0.7rem 1rem; }
+    .exam-header { padding: 1.5rem; }
+  }
+  /* === SCROLLBAR === */
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 5px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--cyan-dim); }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>ITSM6312 — IT Service Management</h1>
+  <p>The Complete ITIL 4 Master Study Guide · Detailed Notes · 100 MCQs · 50 Exam Questions · Final Exam</p>
+  <span class="badge">🎯 ITIL 4 Foundation Aligned · Axle Car Hire Case Study</span>
+</header>
+
+<nav>
+  <a href="#lu1">LU1: ITSM Basics</a>
+  <a href="#lu2">LU2: Dimensions</a>
+  <a href="#lu3">LU3: SVS</a>
+  <a href="#lu4">LU4: Practices</a>
+  <a href="#lu5">LU5: Trends</a>
+  <a href="#mcq">📝 100 MCQs</a>
+  <a href="#practice">📖 50 Exam Qs</a>
+  <a href="#final">📋 Final Exam</a>
+</nav>
+
+<main>
+
+<!-- TOC -->
+<div class="toc">
+  <h3>📖 Table of Contents</h3>
+  <ul>
+    <li><a href="#lu1">🟢 Learning Unit 1: IT Service Management Basics</a></li>
+    <li><a href="#lu2">🔵 Learning Unit 2: The Four Dimensions in Detail</a></li>
+    <li><a href="#lu3">🟣 Learning Unit 3: The Service Value System</a></li>
+    <li><a href="#lu4">🟠 Learning Unit 4: ITIL Management Practices</a></li>
+    <li><a href="#lu5">🔴 Learning Unit 5: Emerging Trends (Agile & AI)</a></li>
+    <li><a href="#mcq">📝 100-Question Interactive MCQ Quiz</a></li>
+    <li><a href="#practice">📖 50 Exam-Calibre Practice Questions</a></li>
+    <li><a href="#final">📋 Final Exam — 50 Questions (100 Marks)</a></li>
+  </ul>
+</div>
+
+<!-- ============================================================ -->
+<!-- LEARNING UNIT 1 -->
+<!-- ============================================================ -->
+<section id="lu1">
+  <h2>🟢 Learning Unit 1: IT Service Management Basics</h2>
+
+  <details open>
+    <summary>Theme 1: What is IT Service Management?</summary>
+    <div>
+      <h4>Source (ITIL 4 Definition)</h4>
+      <p><strong>Service Management:</strong> A set of specialized organizational capabilities for enabling value for customers in the form of services.</p>
+
+      <h4>Simplified</h4>
+      <div class="simplified">
+        <strong>💡 Simple:</strong> ITSM is the <em>"rules, roles, and tools"</em> that keep IT running smoothly. It's not just about fixing computers — it's about understanding what customers need and delivering it reliably.
+      </div>
+
+      <h4>Real-World Example</h4>
+      <div class="example">
+        <strong>🏢 Example:</strong> When you log a ticket for a password reset, the entire system that tracks your request, assigns it to an agent, sends you updates, and closes the ticket when resolved — <strong>that's ITSM in action</strong>.
+      </div>
+
+      <h4>Why ITSM Matters in the Modern World</h4>
+      <ul>
+        <li>Services comprise the largest component of developed and developing economies</li>
+        <li>Almost all services today are <strong>IT-enabled</strong></li>
+        <li>Technology advances (cloud, AI, blockchain) create new value opportunities</li>
+        <li>IT is a <strong>strategic capability</strong> and source of competitive advantage</li>
+        <li>Organisations must balance <strong>stability</strong> with <strong>operational agility</strong></li>
+      </ul>
+
+      <h4>About ITIL 4</h4>
+      <ul>
+        <li>ITIL has led the ITSM industry for <strong>30+ years</strong></li>
+        <li>ITIL 4 reshapes ITSM in the context of <strong>customer experience, value streams, and digital transformation</strong></li>
+        <li>Embraces <strong>Lean, Agile, and DevOps</strong></li>
+        <li>Key components: the <strong>Service Value System (SVS)</strong> and the <strong>Four Dimensions Model</strong></li>
+      </ul>
+
+      <h4>Discussion</h4>
+      <ul>
+        <li>Why is ITSM about value, not just technology?</li>
+        <li>What happens when ITSM is done poorly?</li>
+        <li>How does ITSM differ from IT support?</li>
+      </ul>
+
+      <h4>Key Terms</h4>
+      <table>
+        <tr><th>Term</th><th>Definition</th></tr>
+        <tr><td>ITSM</td><td>Managing IT services to deliver value through people, processes, and technology</td></tr>
+        <tr><td>Service</td><td>A means of enabling value co-creation by facilitating outcomes customers want</td></tr>
+        <tr><td>Value</td><td>The perceived benefits, usefulness, and importance of something</td></tr>
+        <tr><td>Stakeholder</td><td>Anyone with an interest in an organisation, product, service, or practice</td></tr>
+      </table>
+    </div>
+  </details>
+
+  <details>
+    <summary>Theme 2: The Four Dimensions of Service Management</summary>
+    <div>
+      <h4>Source</h4>
+      <p>To support a holistic approach, ITIL defines <strong>four dimensions</strong> that are critical to effective value facilitation.</p>
+
+      <div class="diagram">
+        <svg viewBox="0 0 600 420" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="0" width="600" height="420" fill="#0d1320"/>
+          <polygon points="300,90 510,210 300,330 90,210" fill="none" stroke="#00d4ff" stroke-width="2" opacity="0.3"/>
+          <polygon points="300,140 450,210 300,280 150,210" fill="rgba(0,212,255,0.15)" stroke="#00d4ff" stroke-width="2"/>
+          <text x="300" y="215" text-anchor="middle" fill="#00e676" font-size="16" font-weight="bold">VALUE</text>
+          <rect x="30" y="30" width="200" height="70" rx="8" fill="#141b2e" stroke="#00d4ff" stroke-width="1.5"/>
+          <text x="130" y="60" text-anchor="middle" fill="#00d4ff" font-size="13" font-weight="bold">1. Organisations &amp; People</text>
+          <text x="130" y="80" text-anchor="middle" fill="#8899b0" font-size="10">Culture · Structure · Skills</text>
+          <rect x="370" y="30" width="200" height="70" rx="8" fill="#141b2e" stroke="#00e676" stroke-width="1.5"/>
+          <text x="470" y="60" text-anchor="middle" fill="#00e676" font-size="13" font-weight="bold">2. Information &amp; Tech</text>
+          <text x="470" y="80" text-anchor="middle" fill="#8899b0" font-size="10">Data · Software · Networks</text>
+          <rect x="30" y="320" width="200" height="70" rx="8" fill="#141b2e" stroke="#ff9100" stroke-width="1.5"/>
+          <text x="130" y="350" text-anchor="middle" fill="#ff9100" font-size="13" font-weight="bold">3. Partners &amp; Suppliers</text>
+          <text x="130" y="370" text-anchor="middle" fill="#8899b0" font-size="10">Vendors · Contracts · SLAs</text>
+          <rect x="370" y="320" width="200" height="70" rx="8" fill="#141b2e" stroke="#7c3aed" stroke-width="1.5"/>
+          <text x="470" y="350" text-anchor="middle" fill="#7c3aed" font-size="13" font-weight="bold">4. Value Streams &amp; Processes</text>
+          <text x="470" y="370" text-anchor="middle" fill="#8899b0" font-size="10">Workflows · Activities</text>
+        </svg>
+        <p class="diagram-caption">Figure: The Four Dimensions of Service Management — all must work together for value creation.</p>
+      </div>
+
+      <table>
+        <tr><th>Dimension</th><th>What It Means</th><th>Example</th></tr>
+        <tr><td>Organisations &amp; People</td><td>Culture, structure, roles, skills</td><td>Your IT team, company culture, leadership</td></tr>
+        <tr><td>Information &amp; Technology</td><td>Data, hardware, software, networks</td><td>Servers, databases, cloud platforms, apps</td></tr>
+        <tr><td>Partners &amp; Suppliers</td><td>External vendors and third parties</td><td>Microsoft, AWS, outsourced helpdesk</td></tr>
+        <tr><td>Value Streams &amp; Processes</td><td>Workflows that turn inputs into value</td><td>How a service request moves to completion</td></tr>
+      </table>
+
+      <div class="simplified">
+        <strong>💡 Simple:</strong> Think of a <strong>table with four legs</strong>. If one leg is weak (e.g., untrained staff or outdated tech), the table collapses.
+      </div>
+
+      <div class="example">
+        <strong>🏥 Example:</strong> A hospital's IT system needs:
+        <ul>
+          <li>Skilled staff (Dimension 1)</li>
+          <li>Reliable servers (Dimension 2)</li>
+          <li>A software vendor (Dimension 3)</li>
+          <li>Clear workflows for patient records (Dimension 4)</li>
+        </ul>
+      </div>
+
+      <h4>Key Concepts</h4>
+      <table>
+        <tr><th>Term</th><th>Definition</th></tr>
+        <tr><td>Service Consumer</td><td>The person or entity using the service</td></tr>
+        <tr><td>Customer</td><td>Defines requirements and takes responsibility for outcomes</td></tr>
+        <tr><td>User</td><td>A person who uses services</td></tr>
+        <tr><td>Sponsor</td><td>Authorises budget for service consumption</td></tr>
+        <tr><td>Value</td><td>Perceived benefit — money, efficiency, satisfaction, convenience</td></tr>
+      </table>
+
+      <h4>Evaluating Services (LO5)</h4>
+      <p>A company provides email hosting. Does it meet customer needs?</p>
+      <ul>
+        <li>✅ Fast delivery</li>
+        <li>✅ 99.9% uptime</li>
+        <li>❌ No mobile app</li>
+      </ul>
+      <p>The evaluation identifies gaps for improvement.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Theme 3: The Service Management Lifecycle</summary>
+    <div>
+      <h4>Source</h4>
+      <p>The lifecycle is the <strong>journey of a service</strong> from conception to retirement.</p>
+
+      <div class="diagram">
+        <svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="0" width="700" height="200" fill="#0d1320"/>
+          <rect x="20" y="60" width="110" height="80" rx="8" fill="#141b2e" stroke="#00d4ff" stroke-width="2"/>
+          <text x="75" y="95" text-anchor="middle" fill="#00d4ff" font-size="12" font-weight="bold">Strategy</text>
+          <text x="75" y="115" text-anchor="middle" fill="#8899b0" font-size="10">What to offer</text>
+          <polygon points="140,100 155,90 155,110" fill="#00d4ff"/>
+          <rect x="160" y="60" width="110" height="80" rx="8" fill="#141b2e" stroke="#00e676" stroke-width="2"/>
+          <text x="215" y="95" text-anchor="middle" fill="#00e676" font-size="12" font-weight="bold">Design</text>
+          <text x="215" y="115" text-anchor="middle" fill="#8899b0" font-size="10">Plan how</text>
+          <polygon points="280,100 295,90 295,110" fill="#00e676"/>
+          <rect x="300" y="60" width="110" height="80" rx="8" fill="#141b2e" stroke="#ff9100" stroke-width="2"/>
+          <text x="355" y="95" text-anchor="middle" fill="#ff9100" font-size="12" font-weight="bold">Transition</text>
+          <text x="355" y="115" text-anchor="middle" fill="#8899b0" font-size="10">Build &amp; test</text>
+          <polygon points="420,100 435,90 435,110" fill="#ff9100"/>
+          <rect x="440" y="60" width="110" height="80" rx="8" fill="#141b2e" stroke="#7c3aed" stroke-width="2"/>
+          <text x="495" y="95" text-anchor="middle" fill="#7c3aed" font-size="12" font-weight="bold">Operation</text>
+          <text x="495" y="115" text-anchor="middle" fill="#8899b0" font-size="10">Run daily</text>
+          <polygon points="560,100 575,90 575,110" fill="#7c3aed"/>
+          <rect x="580" y="60" width="110" height="80" rx="8" fill="#141b2e" stroke="#ff4081" stroke-width="2"/>
+          <text x="635" y="95" text-anchor="middle" fill="#ff4081" font-size="12" font-weight="bold">Improve</text>
+          <text x="635" y="115" text-anchor="middle" fill="#8899b0" font-size="10">Make better</text>
+        </svg>
+        <p class="diagram-caption">Figure: The Service Lifecycle — from strategy to continual improvement.</p>
+      </div>
+
+      <div class="simplified">
+        <strong>💡 Simple:</strong> Building a house: <strong>Strategy</strong> (buy land) → <strong>Design</strong> (draw plans) → <strong>Transition</strong> (build) → <strong>Operation</strong> (live in it) → <strong>Improvement</strong> (renovate)
+      </div>
+
+      <div class="example">
+        <strong>☁️ Example:</strong> A company decides to offer cloud backup. They design the schedule, set up servers, test it, monitor it daily, and later improve backup speed.
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ============================================================ -->
+<!-- LEARNING UNIT 2 -->
+<!-- ============================================================ -->
+<section id="lu2">
+  <h2>🔵 Learning Unit 2: The Four Dimensions in Detail</h2>
+
+  <details>
+    <summary>Theme 1: Organisations and People</summary>
+    <div>
+      <h4>Source</h4>
+      <ul>
+        <li><strong>Organisation:</strong> The formal structure, culture, and policies</li>
+        <li><strong>People:</strong> The human element — skills, attitudes, and communication</li>
+      </ul>
+
+      <h4>Key Message</h4>
+      <div class="key-point">
+        The complexity of organisations is growing. It's important that the way an organisation is structured and managed, as well as its roles, responsibilities, and systems of authority, is well defined and supports its overall strategy.
+      </div>
+
+      <div class="simplified">
+        <strong>💡 Simple:</strong> The organisation is the <strong>skeleton</strong>; the people are the <strong>muscles</strong>.
+      </div>
+
+      <div class="example">
+        <strong>🏦 Example:</strong> A bank has a strict hierarchy (Organisation). But its success depends on whether employees are skilled, motivated, and communicate well (People).
+      </div>
+
+      <h4>Key Considerations</h4>
+      <ul>
+        <li>Culture of trust and transparency</li>
+        <li>Leadership styles and communication</li>
+        <li>Skills, competencies, and knowledge</li>
+        <li>Roles and responsibilities</li>
+        <li>Breaking down organisational silos</li>
+        <li>Focus on value creation among all staff</li>
+      </ul>
+
+      <h4>Discussion</h4>
+      <ul>
+        <li>How does culture affect service delivery?</li>
+        <li>Why do organisations become siloed?</li>
+        <li>What skills do ITSM professionals need?</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary>Theme 2: Information and Technology</summary>
+    <div>
+      <h4>Source</h4>
+      <ul>
+        <li><strong>Information:</strong> Data with meaning and context</li>
+        <li><strong>Technology:</strong> The tools that process information</li>
+      </ul>
+
+      <h4>Key Message</h4>
+      <div class="key-point">
+        When applied to the SVS, this dimension includes the information and knowledge necessary for the management of services, as well as the technologies required. It also incorporates the relationships between different components of the SVS.
+      </div>
+
+      <div class="simplified">
+        <strong>💡 Simple:</strong> Information is the <strong>message</strong>; technology is the <strong>phone</strong>.
+      </div>
+
+      <div class="example">
+        <strong>📊 Example:</strong> A CRM system (Technology) stores customer names and purchase histories (Information). This supports the "Customer Service" IT service.
+      </div>
+
+      <h4>Key Questions to Ask</h4>
+      <ul>
+        <li>What information is managed by the services?</li>
+        <li>What supporting information is needed to deliver services?</li>
+        <li>How will information assets be protected, archived, and disposed of?</li>
+        <li>Is the technology compatible with current architecture?</li>
+        <li>Does it raise compliance issues?</li>
+        <li>Does it align with strategy?</li>
+        <li>Do we have the right skills to support it?</li>
+      </ul>
+
+      <h4>Cloud Computing (ITSM in the Modern World)</h4>
+      <table>
+        <tr><th>Model</th><th>Description</th><th>Example</th></tr>
+        <tr><td>SaaS</td><td>Software as a Service</td><td>Office 365, Salesforce</td></tr>
+        <tr><td>PaaS</td><td>Platform as a Service</td><td>Azure App Service, Heroku</td></tr>
+        <tr><td>IaaS</td><td>Infrastructure as a Service</td><td>AWS EC2, Azure VMs</td></tr>
+      </table>
+
+      <h4>Cloud Deployment Models</h4>
+      <ul>
+        <li><strong>Private cloud:</strong> Exclusive to one organisation</li>
+        <li><strong>Public cloud:</strong> Open use, owned by a provider</li>
+        <li><strong>Community cloud:</strong> Shared by organisations with common needs</li>
+        <li><strong>Hybrid cloud:</strong> Combination of two or more models</li>
+      </ul>
+
+      <h4>Impact of Cloud on ITSM Practices</h4>
+      <ul>
+        <li>Service level management</li>
+        <li>Measurement and reporting</li>
+        <li>Information security management</li>
+        <li>Service continuity management</li>
+        <li>Supplier management</li>
+        <li>Incident and problem management</li>
+        <li>Service request management</li>
+        <li>Service configuration management</li>
+      </ul>
+
+      <h4>Discussion</h4>
+      <ul>
+        <li>What questions should organisations ask about information?</li>
+        <li>How does cloud computing change ITSM?</li>
+        <li>What are the risks of technology dependencies?</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary>Theme 3: Partners and Suppliers</summary>
+    <div>
+      <h4>Source</h4>
+      <ul>
+        <li><strong>Supplier:</strong> Provides goods/services under a contract (transactional)</li>
+        <li><strong>Partner:</strong> Strategic, long-term relationship with shared goals</li>
+      </ul>
+
+      <h4>Key Message</h4>
+      <div class="key-point">
+        The partners and suppliers dimension encompasses an organisation's relationships with other organisations involved in the design, development, deployment, delivery, support, and/or continual improvement of services.
+      </div>
+
+      <div class="simplified">
+        <strong>💡 Simple:</strong> Supplier = <strong>Buying a car</strong>. Partner = <strong>Marriage</strong> (long-term, mutual benefit).
+      </div>
+
+      <div class="example">
+        <strong>💼 Example:</strong> A business buys laptops from a local IT shop (Supplier). They use Microsoft Office 365 with ongoing support and innovation (Partner).
+      </div>
+
+      <h4>Forms of Cooperation</h4>
+      <table>
+        <tr><th>Form</th><th>Outputs</th><th>Responsibility</th><th>Example</th></tr>
+        <tr><td>Goods supply</td><td>Goods supplied</td><td>Supplier</td><td>Procurement of computers</td></tr>
+        <tr><td>Service delivery</td><td>Services delivered</td><td>Provider</td><td>Cloud computing</td></tr>
+        <tr><td>Service partnership</td><td>Value co-created</td><td>Shared</td><td>Employee onboarding</td></tr>
+      </table>
+
+      <h4>Sourcing Strategy Factors</h4>
+      <ul>
+        <li><strong>Strategic focus:</strong> Core competency vs self-sufficiency</li>
+        <li><strong>Corporate culture:</strong> Historical preferences</li>
+        <li><strong>Resource scarcity:</strong> Skills availability</li>
+        <li><strong>Cost concerns:</strong> Economical sourcing</li>
+        <li><strong>Subject matter expertise:</strong> Risk of using suppliers</li>
+        <li><strong>External constraints:</strong> Government regulations</li>
+        <li><strong>Demand patterns:</strong> Seasonal variability</li>
+      </ul>
+
+      <h4>Service Integration and Management</h4>
+      <p>Using a specially established integrator to ensure service relationships are properly coordinated. May be internal or delegated to a trusted partner.</p>
+
+      <h4>Discussion</h4>
+      <ul>
+        <li>When should you insource vs outsource?</li>
+        <li>How do you manage multi-sourcing?</li>
+        <li>What are the risks of supplier dependence?</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary>Theme 4: Value Streams, Processes &amp; PESTLE</summary>
+    <div>
+      <h4>Source</h4>
+      <ul>
+        <li><strong>Value Stream:</strong> A series of steps an organisation undertakes to create and deliver products and services to consumers</li>
+        <li><strong>Processes:</strong> A set of interrelated or interacting activities that transform inputs into outputs</li>
+      </ul>
+
+      <h4>Key Message</h4>
+      <div class="key-point">
+        Applied to the organisation and its SVS, the value streams and processes dimension is concerned with how the various parts of the organisation work in an integrated and coordinated way to enable value creation.
+      </div>
+
+      <div class="simplified">
+        <strong>💡 Simple:</strong> Value Stream = <strong>The journey</strong>. Process = <strong>The steps in the journey</strong>.
+      </div>
+
+      <div class="example">
+        <strong>🍕 Example:</strong> Value Stream: Ordering a pizza → Delivery. Process: Taking the order, baking, dispatching.
+      </div>
+
+      <h4>PESTLE Analysis (External Factors)</h4>
+      <div class="diagram">
+        <svg viewBox="0 0 600 350" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="0" width="600" height="350" fill="#0d1320"/>
+          <circle cx="300" cy="175" r="60" fill="rgba(0,212,255,0.15)" stroke="#00d4ff" stroke-width="2"/>
+          <text x="300" y="180" text-anchor="middle" fill="#00d4ff" font-size="14" font-weight="bold">PESTLE</text>
+          <g font-size="11" font-weight="bold">
+            <rect x="230" y="20" width="140" height="30" rx="6" fill="#141b2e" stroke="#ff4081" stroke-width="1.5"/>
+            <text x="300" y="40" text-anchor="middle" fill="#ff4081">Political</text>
+            <rect x="420" y="100" width="140" height="30" rx="6" fill="#141b2e" stroke="#ff9100" stroke-width="1.5"/>
+            <text x="490" y="120" text-anchor="middle" fill="#ff9100">Economic</text>
+            <rect x="420" y="220" width="140" height="30" rx="6" fill="#141b2e" stroke="#00e676" stroke-width="1.5"/>
+            <text x="490" y="240" text-anchor="middle" fill="#00e676">Social</text>
+            <rect x="230" y="300" width="140" height="30" rx="6" fill="#141b2e" stroke="#00d4ff" stroke-width="1.5"/>
+            <text x="300" y="320" text-anchor="middle" fill="#00d4ff">Technological</text>
+            <rect x="30" y="220" width="140" height="30" rx="6" fill="#141b2e" stroke="#7c3aed" stroke-width="1.5"/>
+            <text x="100" y="240" text-anchor="middle" fill="#7c3aed">Legal</text>
+            <rect x="30" y="100" width="140" height="30" rx="6" fill="#141b2e" stroke="#00e676" stroke-width="1.5"/>
+            <text x="100" y="120" text-anchor="middle" fill="#00e676">Environmental</text>
+          </g>
+        </svg>
+        <p class="diagram-caption">Figure: PESTLE external factors influencing service management.</p>
+      </div>
+
+      <table>
+        <tr><th>Factor</th><th>Example Impact on IT</th></tr>
+        <tr><td>Political</td><td>New data privacy laws (POPIA)</td></tr>
+        <tr><td>Economic</td><td>Budget cuts = less IT spending</td></tr>
+        <tr><td>Social</td><td>Remote work = better collaboration tools</td></tr>
+        <tr><td>Technological</td><td>AI emergence = new service opportunities</td></tr>
+        <tr><td>Legal</td><td>Compliance requirements (GDPR)</td></tr>
+        <tr><td>Environmental</td><td>Sustainability goals = green IT</td></tr>
+      </table>
+    </div>
+  </details>
+</section>
+
+<!-- ============================================================ -->
+<!-- LEARNING UNIT 3 -->
+<!-- ============================================================ -->
+<section id="lu3">
+  <h2>🟣 Learning Unit 3: The Service Value System (SVS)</h2>
+
+  <details open>
+    <summary>Theme 1: Understanding the SVS</summary>
+    <div>
+      <h4>Source</h4>
+      <p>The <strong>SVS</strong> describes how all components and activities of the organisation work together as a system to enable value creation.</p>
+
+      <div class="diagram">
+        <svg viewBox="0 0 600 450" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="0" width="600" height="450" fill="#0d1320"/>
+          <polygon points="300,20 540,140 540,310 300,430 60,310 60,140" fill="none" stroke="#7c3aed" stroke-width="2" opacity="0.5"/>
+          <text x="300" y="50" text-anchor="middle" fill="#00d4ff" font-size="14" font-weight="bold">Guiding Principles</text>
+          <polygon points="300,90 460,175 460,275 300,360 140,275 140,175" fill="none" stroke="#00e676" stroke-width="2" opacity="0.6"/>
+          <text x="300" y="115" text-anchor="middle" fill="#00e676" font-size="13" font-weight="bold">Governance</text>
+          <polygon points="300,150 420,200 420,250 300,300 180,250 180,200" fill="rgba(0,212,255,0.2)" stroke="#00d4ff" stroke-width="2"/>
+          <text x="300" y="215" text-anchor="middle" fill="#00d4ff" font-size="13" font-weight="bold">Service</text>
+          <text x="300" y="235" text-anchor="middle" fill="#00d4ff" font-size="13" font-weight="bold">Value Chain</text>
+          <text x="300" y="345" text-anchor="middle" fill="#ff9100" font-size="14" font-weight="bold">Practices</text>
+          <text x="300" y="395" text-anchor="middle" fill="#7c3aed" font-size="14" font-weight="bold">Continual Improvement</text>
+          <circle cx="30" cy="215" r="25" fill="#141b2e" stroke="#ff4081" stroke-width="2"/>
+          <text x="30" y="210" text-anchor="middle" fill="#ff4081" font-size="9" font-weight="bold">Opp</text>
+          <text x="30" y="222" text-anchor="middle" fill="#ff4081" font-size="9" font-weight="bold">Dem</text>
+          <circle cx="570" cy="215" r="25" fill="#141b2e" stroke="#00e676" stroke-width="2"/>
+          <text x="570" y="220" text-anchor="middle" fill="#00e676" font-size="10" font-weight="bold">Value</text>
+          <line x1="55" y1="215" x2="60" y2="215" stroke="#ff4081" stroke-width="2"/>
+          <line x1="540" y1="215" x2="545" y2="215" stroke="#00e676" stroke-width="2"/>
+        </svg>
+        <p class="diagram-caption">Figure: The ITIL Service Value System — the engine that turns opportunity and demand into value.</p>
+      </div>
+
+      <h4>The 5 Components of the SVS</h4>
+      <table>
+        <tr><th>Component</th><th>Simple Explanation</th></tr>
+        <tr><td>1. Guiding Principles</td><td>Recommendations that guide an organisation in all circumstances</td></tr>
+        <tr><td>2. Governance</td><td>The means by which an organisation is directed and controlled</td></tr>
+        <tr><td>3. Service Value Chain</td><td>The 6 activities that turn demand into value</td></tr>
+        <tr><td>4. Practices</td><td>Sets of organisational resources designed for performing work (34 total)</td></tr>
+        <tr><td>5. Continual Improvement</td><td>A recurring activity at all levels to ensure performance meets expectations</td></tr>
+      </table>
+
+      <div class="note">
+        <strong>📌 Inputs and Outputs:</strong><br>
+        <strong>Input:</strong> Opportunity (options/possibilities) and Demand (need/desire for products and services)<br>
+        <strong>Output:</strong> Value (perceived benefits, usefulness, and importance)
+      </div>
+
+      <div class="simplified">
+        <strong>💡 Simple:</strong> The SVS is the <strong>engine</strong> of a car. All parts work together to produce motion (value).
+      </div>
+
+      <h4>Organisational Agility vs Resilience</h4>
+      <ul>
+        <li><strong>Organisational Agility:</strong> The ability to move and adapt quickly, flexibly, and decisively to support internal changes</li>
+        <li><strong>Organisational Resilience:</strong> The ability to anticipate, prepare for, respond to, and adapt to incremental changes and sudden disruptions</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary>Theme 2: The 7 ITIL Guiding Principles</summary>
+    <div>
+      <h4>Source</h4>
+      <p>A guiding principle is a recommendation that guides an organisation in all circumstances, regardless of changes in its goals, strategies, type of work, or management structure.</p>
+
+      <div class="diagram">
+        <svg viewBox="0 0 600 500" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="0" width="600" height="500" fill="#0d1320"/>
+          <circle cx="300" cy="250" r="60" fill="rgba(0,212,255,0.15)" stroke="#00d4ff" stroke-width="2"/>
+          <text x="300" y="245" text-anchor="middle" fill="#00d4ff" font-size="12" font-weight="bold">ITIL</text>
+          <text x="300" y="262" text-anchor="middle" fill="#00d4ff" font-size="12" font-weight="bold">Principles</text>
+          <g font-size="11" font-weight="bold">
+            <rect x="230" y="20" width="140" height="35" rx="6" fill="#141b2e" stroke="#00d4ff" stroke-width="1.5"/>
+            <text x="300" y="42" text-anchor="middle" fill="#00d4ff">1. Focus on Value</text>
+            <rect x="430" y="100" width="150" height="35" rx="6" fill="#141b2e" stroke="#00e676" stroke-width="1.5"/>
+            <text x="505" y="122" text-anchor="middle" fill="#00e676">2. Start Where You Are</text>
+            <rect x="460" y="220" width="130" height="35" rx="6" fill="#141b2e" stroke="#ff9100" stroke-width="1.5"/>
+            <text x="525" y="242" text-anchor="middle" fill="#ff9100">3. Progress Iteratively</text>
+            <rect x="440" y="340" width="150" height="35" rx="6" fill="#141b2e" stroke="#ff4081" stroke-width="1.5"/>
+            <text x="515" y="362" text-anchor="middle" fill="#ff4081">4. Collaborate</text>
+            <rect x="230" y="430" width="140" height="35" rx="6" fill="#141b2e" stroke="#7c3aed" stroke-width="1.5"/>
+            <text x="300" y="452" text-anchor="middle" fill="#7c3aed">5. Think Holistically</text>
+            <rect x="10" y="340" width="130" height="35" rx="6" fill="#141b2e" stroke="#00d4ff" stroke-width="1.5"/>
+            <text x="75" y="362" text-anchor="middle" fill="#00d4ff">6. Keep It Simple</text>
+            <rect x="20" y="220" width="130" height="35" rx="6" fill="#141b2e" stroke="#00e676" stroke-width="1.5"/>
+            <text x="85" y="242" text-anchor="middle" fill="#00e676">7. Optimise &amp; Automate</text>
+            <rect x="20" y="100" width="130" height="35" rx="6" fill="#141b2e" stroke="#ff9100" stroke-width="1.5"/>
+            <text x="85" y="122" text-anchor="middle" fill="#ff9100">Feedback</text>
+          </g>
+        </svg>
+        <p class="diagram-caption">Figure: The 7 Guiding Principles — your decision-making compass.</p>
+      </div>
+
+      <table>
+        <tr><th>Principle</th><th>Simple Meaning</th><th>Example</th></tr>
+        <tr><td>1. Focus on Value</td><td>Everything must map to value for stakeholders</td><td>Before adding a feature, ask: "Does this help customers?"</td></tr>
+        <tr><td>2. Start Where You Are</td><td>Don't reinvent the wheel</td><td>Improve existing processes rather than starting from scratch</td></tr>
+        <tr><td>3. Progress Iteratively with Feedback</td><td>Take small steps, get feedback</td><td>Launch a beta version, get feedback, improve</td></tr>
+        <tr><td>4. Collaborate &amp; Promote Visibility</td><td>Work together, be transparent</td><td>Share dashboards with all teams</td></tr>
+        <tr><td>5. Think &amp; Work Holistically</td><td>See the big picture — no silos</td><td>Consider how IT changes affect sales and HR</td></tr>
+        <tr><td>6. Keep It Simple &amp; Practical</td><td>Don't overcomplicate</td><td>Use simple tools if they work</td></tr>
+        <tr><td>7. Optimise &amp; Automate</td><td>Make things faster and efficient</td><td>Automate password resets</td></tr>
+      </table>
+
+      <div class="example">
+        <strong>🏥 Example:</strong> Improving a slow helpdesk:
+        <ol>
+          <li><strong>Focus on value:</strong> Ask what customers want</li>
+          <li><strong>Start where you are:</strong> Use existing ticketing system</li>
+          <li><strong>Progress iteratively:</strong> Add a chatbot, test, get feedback</li>
+          <li><strong>Collaborate:</strong> Involve helpdesk staff in designing improvements</li>
+          <li><strong>Think holistically:</strong> Consider impact on other departments</li>
+          <li><strong>Keep it simple:</strong> Start with one improvement at a time</li>
+          <li><strong>Optimise &amp; automate:</strong> Automate common requests</li>
+        </ol>
+      </div>
+    </div>
+  </details>
+
+  <details>
+    <summary>Theme 3: Governance, Value Chain &amp; Continual Improvement</summary>
+    <div>
+      <h4>Source</h4>
+      <p><strong>Governance:</strong> The means by which an organisation is directed and controlled. Realised through <strong>Evaluate, Direct, and Monitor</strong>.</p>
+
+      <h4>Governance Activities</h4>
+      <ul>
+        <li><strong>Evaluate:</strong> Evaluate the organisation, its strategy, portfolios, and relationships</li>
+        <li><strong>Direct:</strong> Assign responsibility, direct strategy and policies</li>
+        <li><strong>Monitor:</strong> Monitor performance against policies and direction</li>
+      </ul>
+
+      <h4>The 6 Service Value Chain Activities</h4>
+      <div class="diagram">
+        <svg viewBox="0 0 600 350" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="0" width="600" height="350" fill="#0d1320"/>
+          <rect x="220" y="20" width="160" height="45" rx="8" fill="#141b2e" stroke="#00d4ff" stroke-width="2"/>
+          <text x="300" y="48" text-anchor="middle" fill="#00d4ff" font-size="13" font-weight="bold">Plan</text>
+          <rect x="220" y="285" width="160" height="45" rx="8" fill="#141b2e" stroke="#00e676" stroke-width="2"/>
+          <text x="300" y="313" text-anchor="middle" fill="#00e676" font-size="13" font-weight="bold">Improve</text>
+          <rect x="30" y="155" width="130" height="45" rx="8" fill="#141b2e" stroke="#ff4081" stroke-width="2"/>
+          <text x="95" y="183" text-anchor="middle" fill="#ff4081" font-size="13" font-weight="bold">Engage</text>
+          <rect x="200" y="140" width="200" height="70" rx="8" fill="rgba(0,212,255,0.15)" stroke="#00d4ff" stroke-width="2"/>
+          <text x="300" y="170" text-anchor="middle" fill="#00d4ff" font-size="13" font-weight="bold">Design &amp; Transition</text>
+          <text x="300" y="190" text-anchor="middle" fill="#8899b0" font-size="11">Obtain/Build · Deliver/Support</text>
+          <rect x="440" y="155" width="130" height="45" rx="8" fill="#141b2e" stroke="#ff9100" stroke-width="2"/>
+          <text x="505" y="183" text-anchor="middle" fill="#ff9100" font-size="13" font-weight="bold">Deliver &amp; Support</text>
+          <line x1="160" y1="177" x2="195" y2="177" stroke="#8899b0" stroke-width="1.5"/>
+          <line x1="405" y1="177" x2="435" y2="177" stroke="#8899b0" stroke-width="1.5"/>
+        </svg>
+        <p class="diagram-caption">Figure: The 6 Value Chain Activities.</p>
+      </div>
+
+      <table>
+        <tr><th>Activity</th><th>What It Does</th></tr>
+        <tr><td>Plan</td><td>Ensure shared understanding of vision, current status, and improvement direction</td></tr>
+        <tr><td>Improve</td><td>Ensure continual improvement of products, services, and practices</td></tr>
+        <tr><td>Engage</td><td>Provide good understanding of stakeholder needs and good relationships</td></tr>
+        <tr><td>Design &amp; Transition</td><td>Ensure products and services meet expectations for quality, cost, time to market</td></tr>
+        <tr><td>Obtain &amp; Build</td><td>Ensure service components are available when and where needed</td></tr>
+        <tr><td>Deliver &amp; Support</td><td>Ensure services are delivered and supported according to agreed specs</td></tr>
+      </table>
+
+      <div class="note">
+        <strong>⚠️ Common Rules for the Value Chain:</strong>
+        <ul>
+          <li>All external interactions are performed via <strong>Engage</strong></li>
+          <li>All new resources are obtained through <strong>Obtain/Build</strong></li>
+          <li>Planning at all levels is performed via <strong>Plan</strong></li>
+          <li>Improvements at all levels are initiated and managed via <strong>Improve</strong></li>
+        </ul>
+      </div>
+
+      <h4>The Continual Improvement Model</h4>
+      <div class="diagram">
+        <svg viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="0" width="600" height="320" fill="#0d1320"/>
+          <g font-size="11" font-weight="bold">
+            <rect x="220" y="20" width="160" height="35" rx="6" fill="#141b2e" stroke="#00d4ff" stroke-width="1.5"/>
+            <text x="300" y="42" text-anchor="middle" fill="#00d4ff">1. What is the vision?</text>
+            <rect x="420" y="80" width="150" height="35" rx="6" fill="#141b2e" stroke="#00e676" stroke-width="1.5"/>
+            <text x="495" y="102" text-anchor="middle" fill="#00e676">2. Where are we now?</text>
+            <rect x="420" y="140" width="150" height="35" rx="6" fill="#141b2e" stroke="#ff9100" stroke-width="1.5"/>
+            <text x="495" y="162" text-anchor="middle" fill="#ff9100">3. Where do we want to be?</text>
+            <rect x="420" y="200" width="150" height="35" rx="6" fill="#141b2e" stroke="#ff4081" stroke-width="1.5"/>
+            <text x="495" y="222" text-anchor="middle" fill="#ff4081">4. How do we get there?</text>
+            <rect x="220" y="260" width="160" height="35" rx="6" fill="#141b2e" stroke="#7c3aed" stroke-width="1.5"/>
+            <text x="300" y="282" text-anchor="middle" fill="#7c3aed">5. Take action</text>
+            <rect x="20" y="200" width="160" height="35" rx="6" fill="#141b2e" stroke="#00d4ff" stroke-width="1.5"/>
+            <text x="100" y="222" text-anchor="middle" fill="#00d4ff">6. Did we get there?</text>
+            <rect x="20" y="140" width="160" height="35" rx="6" fill="#141b2e" stroke="#00e676" stroke-width="1.5"/>
+            <text x="100" y="162" text-anchor="middle" fill="#00e676">7. Keep momentum going</text>
+          </g>
+        </svg>
+        <p class="diagram-caption">Figure: The 7-step Continual Improvement Model.</p>
+      </div>
+
+      <ol>
+        <li><strong>What is the vision?</strong> — Define the initiative's vision and link to organisational goals</li>
+        <li><strong>Where are we now?</strong> — Assess the current state with objective measurement</li>
+        <li><strong>Where do we want to be?</strong> — Define target state with SMART objectives, CSFs, and KPIs</li>
+        <li><strong>How do we get there?</strong> — Plan the route, possibly with experiments</li>
+        <li><strong>Take action</strong> — Execute the plan, maintaining focus on measuring progress</li>
+        <li><strong>Did we get there?</strong> — Validate success and confirm value</li>
+        <li><strong>How do we keep the momentum going?</strong> — Embed and reinforce improvements</li>
+      </ol>
+    </div>
+  </details>
+</section>
+
+<!-- ============================================================ -->
+<!-- LEARNING UNIT 4 -->
+<!-- ============================================================ -->
+<section id="lu4">
+  <h2>🟠 Learning Unit 4: ITIL Management Practices</h2>
+
+  <details>
+    <summary>Theme 1: General Management Practices (14 total)</summary>
+    <div>
+      <h4>Source</h4>
+      <p>Adapted from general business management domains.</p>
+
+      <table>
+        <tr><th>Practice</th><th>Purpose</th><th>SVC Contribution</th></tr>
+        <tr><td>Architecture Management</td><td>Understanding all elements of the organisation and how they interrelate</td><td>Plan, Improve, Design &amp; Transition</td></tr>
+        <tr><td>Continual Improvement</td><td>Align practices and services with changing business needs</td><td>All activities</td></tr>
+        <tr><td>Information Security Management</td><td>Protect the information needed to conduct business</td><td>Design &amp; Transition, Deliver &amp; Support</td></tr>
+        <tr><td>Knowledge Management</td><td>Maintain and improve the use of information and knowledge</td><td>Engage, Deliver &amp; Support</td></tr>
+        <tr><td>Measurement and Reporting</td><td>Support good decision-making by decreasing uncertainty</td><td>All activities</td></tr>
+        <tr><td>Organisational Change Management</td><td>Ensure changes are smoothly and successfully implemented</td><td>All activities</td></tr>
+        <tr><td>Portfolio Management</td><td>Ensure the right mix of programmes, projects, products, and services</td><td>Plan, Improve, Engage</td></tr>
+        <tr><td>Project Management</td><td>Ensure all projects are successfully delivered</td><td>Design &amp; Transition, Obtain &amp; Build</td></tr>
+        <tr><td>Relationship Management</td><td>Establish and nurture links with stakeholders</td><td>Engage</td></tr>
+        <tr><td>Risk Management</td><td>Ensure the organisation understands and handles risks</td><td>Plan</td></tr>
+        <tr><td>Service Financial Management</td><td>Support strategies and plans for service management financially</td><td>Plan, Engage, Design &amp; Transition</td></tr>
+        <tr><td>Strategy Management</td><td>Formulate goals and adopt courses of action</td><td>Plan</td></tr>
+        <tr><td>Supplier Management</td><td>Manage suppliers and their performance appropriately</td><td>Obtain &amp; Build</td></tr>
+        <tr><td>Workforce and Talent Management</td><td>Ensure the right people with the right skills in the right roles</td><td>Plan, Improve, Engage</td></tr>
+      </table>
+
+      <div class="example">
+        <strong>🏢 Example:</strong> A company launching a new HR system:
+        <ul>
+          <li><strong>Project Management</strong> plans the launch</li>
+          <li><strong>Supplier Management</strong> handles the vendor</li>
+          <li><strong>Information Security</strong> ensures employee data is protected</li>
+          <li><strong>Continual Improvement</strong> monitors and improves after launch</li>
+        </ul>
+      </div>
+    </div>
+  </details>
+
+  <details>
+    <summary>Theme 2: Service Management Practices (17 total)</summary>
+    <div>
+      <h4>Source</h4>
+      <p>Developed specifically in the service management industry.</p>
+
+      <table>
+        <tr><th>Practice</th><th>Purpose</th><th>Example</th></tr>
+        <tr><td>Availability Management</td><td>Ensure services deliver agreed levels of availability</td><td>Keeping website online 24/7</td></tr>
+        <tr><td>Business Analysis</td><td>Analyse business needs and recommend solutions</td><td>Gathering requirements for a new app</td></tr>
+        <tr><td>Capacity &amp; Performance Management</td><td>Ensure services achieve agreed performance levels</td><td>Adding servers during peak season</td></tr>
+        <tr><td>Change Control</td><td>Maximise successful changes by assessing risks and authorising</td><td>Approving a software update</td></tr>
+        <tr><td>Incident Management</td><td>Minimise negative impact of incidents by restoring service quickly</td><td>Fixing a server crash</td></tr>
+        <tr><td>IT Asset Management</td><td>Plan and manage the full lifecycle of IT assets</td><td>Tracking hardware and software licences</td></tr>
+        <tr><td>Monitoring &amp; Event Management</td><td>Systematically observe services and record events</td><td>Detecting server failure before it crashes</td></tr>
+        <tr><td>Problem Management</td><td>Reduce likelihood and impact of incidents by finding root causes</td><td>Investigating why a server keeps crashing</td></tr>
+        <tr><td>Release Management</td><td>Make new and changed services available for use</td><td>Rolling out a new app version</td></tr>
+        <tr><td>Service Catalogue Management</td><td>Provide a single source of consistent information on services</td><td>Online portal listing available services</td></tr>
+        <tr><td>Service Configuration Management</td><td>Ensure accurate information about configurations is available</td><td>CMDB tracking CIs and relationships</td></tr>
+        <tr><td>Service Continuity Management</td><td>Ensure availability and performance in case of disaster</td><td>Disaster recovery plans</td></tr>
+        <tr><td>Service Design</td><td>Design products and services that are fit for purpose and use</td><td>Design thinking and CX/UX</td></tr>
+        <tr><td>Service Desk</td><td>Capture demand for incident resolution and service requests</td><td>The helpdesk team</td></tr>
+        <tr><td>Service Level Management</td><td>Set clear business-based targets for service levels</td><td>Ensuring 99.9% uptime</td></tr>
+        <tr><td>Service Request Management</td><td>Handle pre-defined, user-initiated service requests</td><td>Password resets, software installs</td></tr>
+        <tr><td>Service Validation &amp; Testing</td><td>Ensure new/changed products and services meet requirements</td><td>User acceptance testing</td></tr>
+      </table>
+
+      <div class="note">
+        <strong>⚠️ Incident vs Problem:</strong><br>
+        <strong>Incident:</strong> "The website is down!" → Fix it quickly<br>
+        <strong>Problem:</strong> "Why did the website go down?" → Investigate root cause and fix permanently
+      </div>
+    </div>
+  </details>
+
+  <details>
+    <summary>Theme 3: Technical Management Practices (3 total)</summary>
+    <div>
+      <h4>Source</h4>
+      <p>Adapted from technology management domains.</p>
+
+      <table>
+        <tr><th>Practice</th><th>Purpose</th><th>Example</th></tr>
+        <tr><td>Deployment Management</td><td>Move new/changed components to live environments</td><td>Rolling out a new app version</td></tr>
+        <tr><td>Infrastructure &amp; Platform Management</td><td>Oversee the infrastructure and platforms used</td><td>Maintaining servers, networks, cloud</td></tr>
+        <tr><td>Software Development &amp; Management</td><td>Ensure applications meet stakeholder needs</td><td>Coding, testing, updating apps</td></tr>
+      </table>
+
+      <div class="example">
+        <strong>💻 Example:</strong> <strong>Software Development</strong> creates the app; <strong>Service Desk</strong> supports users of that app. Technical practices ensure the <strong>technology foundation</strong> is solid.
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ============================================================ -->
+<!-- LEARNING UNIT 5 -->
+<!-- ============================================================ -->
+<section id="lu5">
+  <h2>🔴 Learning Unit 5: Emerging Trends (Agile &amp; AI)</h2>
+
+  <details open>
+    <summary>Theme 1: Agile vs ITIL Approaches</summary>
+    <div>
+      <h4>Source</h4>
+      <ul>
+        <li><strong>Agile:</strong> Flexible, iterative, fast, welcomes change</li>
+        <li><strong>ITIL:</strong> Structured, methodical, controlled, manages risk</li>
+      </ul>
+
+      <table>
+        <tr><th>Aspect</th><th>Agile</th><th>ITIL</th></tr>
+        <tr><td>Focus</td><td>Individuals and interactions</td><td>Processes and procedures</td></tr>
+        <tr><td>Approach</td><td>Flexible, iterative</td><td>Structured, planned</td></tr>
+        <tr><td>Speed</td><td>Fast, continuous delivery</td><td>Methodical, controlled</td></tr>
+        <tr><td>Change</td><td>Welcomes change at any time</td><td>Managed through formal processes</td></tr>
+        <tr><td>Best For</td><td>Software development</td><td>IT operations and service management</td></tr>
+      </table>
+
+      <div class="simplified">
+        <strong>💡 Simple:</strong> Agile is the <strong>sports car</strong> (fast, agile). ITIL is the <strong>Volvo</strong> (safe, reliable).
+      </div>
+
+      <h4>How Agile and ITIL Work Together</h4>
+      <ul>
+        <li>Streamlining practices such as change control</li>
+        <li>Establishing procedures for unplanned interruptions</li>
+        <li>Separating "systems of record" from "systems of engagement"</li>
+        <li>DevOps combines Agile + ITIL + Lean</li>
+      </ul>
+
+      <div class="example">
+        <strong>🏦 Example:</strong> A bank builds an app:
+        <ul>
+          <li><strong>Agile:</strong> Developers build in 2-week sprints</li>
+          <li><strong>ITIL:</strong> Operations ensure infrastructure is secure and reliable</li>
+          <li><strong>Together:</strong> Fast development + reliable operations = success!</li>
+        </ul>
+      </div>
+    </div>
+  </details>
+
+  <details>
+    <summary>Theme 2: AI in IT Service Management</summary>
+    <div>
+      <h4>Source</h4>
+      <p>AI is transforming ITSM from <strong>reactive</strong> (fixing problems after they occur) to <strong>proactive</strong> (preventing problems before they happen).</p>
+
+      <table>
+        <tr><th>Application</th><th>What It Does</th><th>Example</th></tr>
+        <tr><td>Automated Ticketing</td><td>AI reads and categorises tickets</td><td>Chatbot handles password resets</td></tr>
+        <tr><td>Predictive Analytics</td><td>Predicts problems before they occur</td><td>AI detects a server will fail in 3 days</td></tr>
+        <tr><td>Incident Resolution</td><td>AI suggests solutions</td><td>"Based on similar issues, try restarting"</td></tr>
+        <tr><td>AIOps</td><td>AI-powered IT operations</td><td>Self-healing systems</td></tr>
+        <tr><td>Intelligent Service Desk</td><td>Virtual agents handle queries</td><td>"What's my internet bill?" answered instantly</td></tr>
+      </table>
+
+      <h4>Advantages of AI in ITSM</h4>
+      <table>
+        <tr><th>Advantage</th><th>Explanation</th></tr>
+        <tr><td>Faster Resolution</td><td>AI resolves incidents up to 30.5% faster</td></tr>
+        <tr><td>24/7 Availability</td><td>AI never sleeps</td></tr>
+        <tr><td>Reduced Workload</td><td>AI handles routine tasks</td></tr>
+        <tr><td>Cost Savings</td><td>Fewer staff needed for repetitive work</td></tr>
+        <tr><td>Better Predictions</td><td>AI predicts and prevents incidents</td></tr>
+        <tr><td>Consistent Quality</td><td>AI applies the same logic every time</td></tr>
+      </table>
+
+      <div class="example">
+        <strong>📧 Example:</strong> A company's email server is running slow:
+        <ul>
+          <li><strong>Old way:</strong> Users complain → Helpdesk logs ticket → IT investigates → Fixes it (hours or days)</li>
+          <li><strong>AI way:</strong> AI monitors server → Detects unusual pattern → Predicts failure → Automatically allocates more resources → Issue resolved before anyone notices!</li>
+        </ul>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ============================================================ -->
+<!-- MCQ QUIZ - 100 QUESTIONS -->
+<!-- ============================================================ -->
+<section id="mcq">
+  <h2>📝 Interactive MCQ Quiz — 100 Questions</h2>
+  <p style="color: var(--muted); margin-bottom: 1.5rem;">Test your knowledge with 100 multiple-choice questions. Click an option to see if you're correct. Your score updates automatically.</p>
+
+  <div class="quiz-header">
+    <span class="quiz-score" id="mcqScore">Score: 0 / 0</span>
+    <div>
+      <button onclick="resetMCQ()">🔄 Reset Quiz</button>
+      <button class="secondary" onclick="scrollToTop()">⬆ Top</button>
+    </div>
+  </div>
+
+  <div id="mcqContainer"></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 50 EXAM PRACTICE QUESTIONS -->
+<!-- ============================================================ -->
+<section id="practice">
+  <h2>📖 50 Exam-Calibre Practice Questions</h2>
+  <p style="color: var(--muted); margin-bottom: 1.5rem;">These questions reflect the style and depth of your final exam. Click each to reveal the model answer.</p>
+
+  <details>
+    <summary>Q1. Define "Service Management" and explain its purpose in modern organisations. (5 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong> Service Management is a set of specialized organizational capabilities for enabling value for customers in the form of services. Its purpose is to deliver value through services, align IT with business needs, ensure reliability, and continuously improve how services are delivered. In the modern world, almost all services are IT-enabled, making ITSM a strategic capability that provides competitive advantage.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q2. List the Four Dimensions of Service Management and give one example of each. (8 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong></p>
+      <ol>
+        <li><strong>Organisations &amp; People:</strong> Culture, structure, roles, skills (e.g., IT team, leadership)</li>
+        <li><strong>Information &amp; Technology:</strong> Data, hardware, software, networks (e.g., servers, cloud platforms)</li>
+        <li><strong>Partners &amp; Suppliers:</strong> External vendors and third parties (e.g., Microsoft, AWS)</li>
+        <li><strong>Value Streams &amp; Processes:</strong> Workflows that turn inputs into value (e.g., incident resolution workflow)</li>
+      </ol>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q3. Explain the difference between a Supplier and a Partner, with examples. (5 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong> A <strong>Supplier</strong> provides goods or services under a contract, usually transactional. Example: A local IT shop for hardware repairs. A <strong>Partner</strong> has a strategic, long-term relationship with shared goals. Example: Microsoft for Office 365 with ongoing support and innovation. Partners involve deeper collaboration and co-creation of value, while suppliers are managed through contracts and SLAs.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q4. Describe the purpose of the Continual Improvement Model and list its 7 steps. (10 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong> The model provides a structured approach to implementing improvements. The 7 steps are:</p>
+      <ol>
+        <li>What is the vision?</li>
+        <li>Where are we now?</li>
+        <li>Where do we want to be?</li>
+        <li>How do we get there?</li>
+        <li>Take action</li>
+        <li>Did we get there?</li>
+        <li>How do we keep the momentum going?</li>
+      </ol>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q5. Explain how Agile and ITIL can work together in an organisation. (5 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong> Agile focuses on flexibility and rapid delivery, while ITIL provides structure and reliability. Together, they enable fast development with reliable operations. For example, a bank can use Agile to build a mobile app in 2-week sprints while ITIL ensures the infrastructure is secure and incidents are managed. Agile ITSM applies Agile principles to service management, such as using sprints to improve IT processes.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q6. Describe two advantages of using AI in IT Service Management. (5 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong></p>
+      <ol>
+        <li><strong>Faster Resolution:</strong> AI resolves incidents up to 30.5% faster by automating routine tasks and suggesting solutions.</li>
+        <li><strong>Predictive Analytics:</strong> AI predicts and prevents incidents before they occur, such as detecting a server that will fail in 3 days.</li>
+      </ol>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q7. Define "Value" in the context of service management and explain why it is subjective. (5 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong> <strong>Value</strong> is the perceived benefits, usefulness, and importance of something. It is subjective because different stakeholders perceive value differently. For example, a retired person might value flexibility in car hire, while a business might value reliability and cost-effectiveness. Value is co-created through the relationship between provider and consumer, and it changes over time and in different circumstances.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q8. What is the purpose of the Service Value Chain? List its 6 activities. (7 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong> The Service Value Chain is an operating model that outlines the key activities required to respond to demand and facilitate value realization through the creation and management of products and services. Its 6 activities are:</p>
+      <ol>
+        <li>Plan</li>
+        <li>Improve</li>
+        <li>Engage</li>
+        <li>Design &amp; Transition</li>
+        <li>Obtain &amp; Build</li>
+        <li>Deliver &amp; Support</li>
+      </ol>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q9. Explain the difference between an Incident and a Problem. (5 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong> An <strong>Incident</strong> is an unplanned interruption to a service or reduction in the quality of a service. It has an impact on users or business processes and must be resolved quickly to restore normal service operation. A <strong>Problem</strong> is a cause, or potential cause, of one or more incidents. Problems require investigation and analysis to identify the causes, develop workarounds, and recommend longer-term resolution. This reduces the number and impact of future incidents.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q10. Describe the 7 ITIL Guiding Principles. (14 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong></p>
+      <ol>
+        <li><strong>Focus on Value:</strong> Everything must map to value for stakeholders.</li>
+        <li><strong>Start Where You Are:</strong> Don't reinvent the wheel — use what you have.</li>
+        <li><strong>Progress Iteratively with Feedback:</strong> Take small steps, get feedback, adjust.</li>
+        <li><strong>Collaborate &amp; Promote Visibility:</strong> Work together and be transparent.</li>
+        <li><strong>Think &amp; Work Holistically:</strong> See the big picture — no silos.</li>
+        <li><strong>Keep It Simple &amp; Practical:</strong> Don't overcomplicate things.</li>
+        <li><strong>Optimise &amp; Automate:</strong> Make things faster and more efficient.</li>
+      </ol>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q11. What is the difference between Utility and Warranty? (5 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong> <strong>Utility</strong> is the functionality offered by a product or service to meet a particular need. It can be summarised as "what the service does" and determines whether a service is "fit for purpose." <strong>Warranty</strong> is assurance that a product or service will meet agreed requirements. It can be summarised as "how the service performs" and determines whether a service is "fit for use." Warranty typically addresses availability, capacity, security, and continuity.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q12. Explain the purpose of the Service Desk practice. (5 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong> The purpose of the Service Desk practice is to capture demand for incident resolution and service requests. It should be the entry point and single point of contact for the service provider with all of its users. Service desks provide a clear path for users to report issues, queries, and requests, and have them acknowledged, classified, owned, and actioned.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q13. Describe the 3 types of change in Change Control. (6 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong></p>
+      <ol>
+        <li><strong>Standard Changes:</strong> Low-risk, pre-authorised changes that are well understood and fully documented. Can be implemented without additional authorisation.</li>
+        <li><strong>Normal Changes:</strong> Changes that need to be scheduled, assessed, and authorised following a process. Change models determine the roles for assessment and authorisation.</li>
+        <li><strong>Emergency Changes:</strong> Changes that must be implemented as soon as possible, such as to resolve an incident or implement a security patch. The process for assessment and authorisation is expedited.</li>
+      </ol>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q14. What is the purpose of Problem Management? (5 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong> The purpose of Problem Management is to reduce the likelihood and impact of incidents by identifying actual and potential causes of incidents, and managing workarounds and known errors. It involves three phases: Problem Identification, Problem Control, and Error Control.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q15. Explain the concept of "Value Co-creation". (5 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong> Value co-creation is the active collaboration between providers and consumers, as well as other organisations, to create value. Instead of the provider delivering value unilaterally, both parties work together to define requirements, design solutions, and create or provision the service. This ensures that the value delivered is truly aligned with what the consumer needs and wants.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q16. List and explain 3 General Management Practices. (6 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong></p>
+      <ol>
+        <li><strong>Continual Improvement:</strong> Aligns practices and services with changing business needs through ongoing improvement.</li>
+        <li><strong>Information Security Management:</strong> Protects the information needed by the organisation to conduct its business.</li>
+        <li><strong>Project Management:</strong> Ensures all projects are successfully delivered through planning, delegating, monitoring, and maintaining control.</li>
+      </ol>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q17. Describe the purpose of Availability Management. (5 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong> The purpose of Availability Management is to ensure that services deliver agreed levels of availability to meet the needs of customers and users. It involves negotiating achievable targets, designing infrastructure and applications for required availability, monitoring and reporting on availability, and planning improvements.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q18. Explain the concept of "Known Error". (4 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong> A Known Error is a problem that has been analysed but has not been resolved. It usually means that faulty components have been identified. Workarounds are documented for known errors so that future incidents can be resolved quickly. The problem remains in the known error status until a permanent resolution is found.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q19. What is the purpose of Service Level Management? (5 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong> The purpose of Service Level Management is to set clear business-based targets for service levels, and to ensure that delivery of services is properly assessed, monitored, and managed against these targets. It provides end-to-end visibility of the organisation's services and ensures that the organisation meets the defined service levels.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q20. Describe the 5 components of the SVS. (10 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong></p>
+      <ol>
+        <li><strong>Guiding Principles:</strong> Recommendations that guide an organisation in all circumstances.</li>
+        <li><strong>Governance:</strong> The means by which an organisation is directed and controlled.</li>
+        <li><strong>Service Value Chain:</strong> A set of interconnected activities that an organisation performs to deliver a valuable product or service.</li>
+        <li><strong>Practices:</strong> Sets of organisational resources designed for performing work or accomplishing an objective.</li>
+        <li><strong>Continual Improvement:</strong> A recurring organisational activity performed at all levels to ensure performance continually meets stakeholders' expectations.</li>
+      </ol>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q21. Explain the difference between "Output" and "Outcome". (5 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong> An <strong>Output</strong> is a tangible or intangible deliverable of an activity. An <strong>Outcome</strong> is a result for a stakeholder enabled by one or more outputs. For example, one output of a wedding photography service may be an album. The outcome is the preservation of memories and the ability of the couple and their family to recall those memories.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q22. Describe the purpose of the Service Catalogue Management practice. (5 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong> The purpose of Service Catalogue Management is to provide a single source of consistent information on all services and service offerings, and to ensure that it is available to the relevant audience. The service catalogue represents those services which are currently available and is a subset of the total list of services tracked in the service provider's service portfolio.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q23. Explain the purpose of the Continual Improvement practice. (5 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong> The purpose of the Continual Improvement practice is to align the organisation's practices and services with changing business needs through the ongoing improvement of products, services, and practices, or any element involved in the management of products and services. It involves encouraging continual improvement, securing time and budget, identifying and logging opportunities, assessing and prioritising, and making business cases.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q24. What is the difference between "Service Provision" and "Service Consumption"? (5 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong> <strong>Service Provision</strong> includes the management of the provider's resources, configured to deliver the service; ensuring access to these resources for users; fulfilment of the agreed service actions; service level management; and continual improvement. <strong>Service Consumption</strong> includes the management of the consumer's resources needed to use the service; service actions performed by users; and the receiving (acquiring) of goods.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q25. Describe the purpose of the Information Security Management practice. (5 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong> The purpose of Information Security Management is to protect the information needed by the organisation to conduct its business. This includes understanding and managing risks to the confidentiality, integrity, and availability of information, as well as authentication and non-repudiation. Security is established through policies, processes, behaviours, risk management, and controls that balance prevention, detection, and correction.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q26. Explain the "Watermelon SLA" effect. (5 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong> The "Watermelon SLA" effect describes a situation where an SLA appears green (successful) on the outside but is actually red (failing) on the inside. This happens when SLAs are based on individual metrics like system availability (99.9%) without a business context. The reports may show success, but if unavailability occurs during critical business times, customer satisfaction will be low. The provider thinks it's doing a great job, but customers are dissatisfied.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q27. Describe the purpose of the Risk Management practice. (5 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong> The purpose of Risk Management is to ensure that the organisation understands and effectively handles risks. Managing risk is essential to ensuring ongoing sustainability and creating value. Risks need to be identified, assessed, and treated. The practice also recognises that risk is associated with opportunity, and failure to take opportunities can be a risk itself.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q28. What are the 6 activities of the Service Value Chain? (6 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong></p>
+      <ol>
+        <li>Plan</li>
+        <li>Improve</li>
+        <li>Engage</li>
+        <li>Design &amp; Transition</li>
+        <li>Obtain &amp; Build</li>
+        <li>Deliver &amp; Support</li>
+      </ol>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q29. Explain the concept of "Minimum Viable Product" (MVP). (4 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong> A Minimum Viable Product (MVP) is a version of the final product which allows the maximum amount of validated learning with the least effort. It has just enough features to satisfy early customers and provide feedback for future product development. The MVP concept is used in iterative development to test assumptions and gather feedback early.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q30. Describe the purpose of the Deployment Management practice. (5 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong> The purpose of Deployment Management is to move new or changed hardware, software, documentation, processes, or any other component to live environments. It may also be involved in deploying components to other environments for testing or staging. Deployment works closely with release management and change control but is a separate practice.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q31. What is the purpose of the Relationship Management practice? (5 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong> The purpose of Relationship Management is to establish and nurture the links between the organisation and its stakeholders at strategic and tactical levels. It includes the identification, analysis, monitoring, and continual improvement of relationships with and between stakeholders. It ensures stakeholders' needs are understood, satisfaction is high, and conflicting requirements are mediated appropriately.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q32. Explain the concept of "Organisational Agility". (4 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong> Organisational agility is the ability of an organisation to move and adapt quickly, flexibly, and decisively to support internal changes. These might include changes to the scope of the organisation, mergers and acquisitions, changing organisational practices, or technologies requiring different skills or organisational structure. It is essential for success in a constantly changing environment.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q33. Describe the purpose of the IT Asset Management practice. (5 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong> The purpose of IT Asset Management is to plan and manage the full lifecycle of all IT assets to help the organisation maximize value, control costs, manage risks, support decision-making about purchase, re-use, retirement, and disposal of assets, and meet regulatory and contractual requirements. It typically includes software, hardware, networking, cloud services, and client devices.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q34. Explain the "Theory of Constraints" in the context of continual improvement. (5 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong> The Theory of Constraints (ToC) states that the weakest link in the value chain determines the flow and throughput of the system. When planning improvements, it is crucial to focus on the highest-priority work — the weakest link. The weakest link must be elevated as much as possible (sometimes revealing a new weakest link), and all other steps in the value chain must be organized around it.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q35. What is the purpose of the Service Request Management practice? (5 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong> The purpose of Service Request Management is to support the agreed quality of a service by handling all pre-defined, user-initiated service requests in an effective and user-friendly manner. Service requests are a normal part of service delivery and are not a failure or degradation of service. They can usually be formalized with clear, standard procedures for initiation, approval, fulfilment, and management.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q36. Describe the purpose of the Service Continuity Management practice. (5 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong> The purpose of Service Continuity Management is to ensure that the availability and performance of a service are maintained at sufficient levels in case of a disaster. It provides a framework for building organisational resilience with the capability of producing an effective response that safeguards the interests of key stakeholders and the organisation's reputation, brand, and value-creating activities.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q37. Explain the difference between "Emergency Change" and "Normal Change". (5 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong> <strong>Emergency Changes</strong> must be implemented as soon as possible, such as to resolve an incident or implement a security patch. They are not typically included in a change schedule, and the process for assessment and authorisation is expedited. <strong>Normal Changes</strong> need to be scheduled, assessed, and authorised following a process. Change models based on the type of change determine the roles for assessment and authorisation.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q38. What is the purpose of the Service Design practice? (5 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong> The purpose of Service Design is to design products and services that are fit for purpose, fit for use, and that can be delivered by the organisation and its ecosystem. This includes planning and organizing people, partners and suppliers, information, communication, technology, and practices for new or changed products and services, and the interaction between the organisation and its customers.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q39. Explain the concept of "Design Thinking". (5 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong> Design Thinking is a practical and human-centred approach that accelerates innovation. It is used to solve complex problems and find practical, creative solutions that meet the needs of the organisation and its customers. It includes activities such as inspiration and empathy, ideation (divergent and convergent thinking), prototyping, implementation, and evaluation. It is best applied by multi-disciplinary teams.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q40. Describe the purpose of the Monitoring and Event Management practice. (5 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong> The purpose of Monitoring and Event Management is to systematically observe services and service components, and record and report selected changes of state identified as events. It identifies and prioritizes infrastructure, services, business processes, and information security events, and establishes the appropriate response to those events, including responding to conditions that could lead to potential faults or incidents.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q41. What is the purpose of the Service Configuration Management practice? (5 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong> The purpose of Service Configuration Management is to ensure that accurate and reliable information about the configuration of services, and the configuration items (CIs) that support them, is available when and where it is needed. This includes information on how CIs are configured and the relationships between them. It helps the organisation understand how the many CIs that contribute to each service work together.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q42. Explain the "Watermelon SLA" effect and how to avoid it. (5 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong> The Watermelon SLA effect occurs when SLAs appear successful (green) but customers are actually dissatisfied (red). This happens when SLAs are based on single-system metrics without business context. To avoid it, Service Level Management must identify metrics that truly reflect customer experience and satisfaction. SLAs should relate to defined outcomes, include balanced bundles of metrics (e.g., customer satisfaction + key business outcomes), and be based on genuine agreement between provider and consumer.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q43. Describe the purpose of the Supplier Management practice. (5 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong> The purpose of Supplier Management is to ensure that the organisation's suppliers and their performances are managed appropriately to support the seamless provision of quality products and services. This includes creating closer, more collaborative relationships with key suppliers to uncover and realize new value and reduce the risk of failure. It involves maintaining a supplier strategy, negotiating contracts, managing relationships, and monitoring performance.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q44. Explain the concept of "Organisational Resilience". (4 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong> Organisational resilience is the ability of an organisation to anticipate, prepare for, respond to, and adapt to both incremental changes and sudden disruptions from an external perspective. External influences could be political, economic, social, technological, legal, or environmental. Resilience cannot be achieved without a common understanding of the organisation's priorities and objectives.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q45. What is the purpose of the Workforce and Talent Management practice? (5 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong> The purpose of Workforce and Talent Management is to ensure that the organisation has the right people with the appropriate skills and knowledge and in the correct roles to support its business objectives. It covers a broad set of activities including planning, recruitment, onboarding, learning and development, performance measurement, and succession planning. It plays a critical role in establishing organisational velocity.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q46. Describe the purpose of the Portfolio Management practice. (5 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong> The purpose of Portfolio Management is to ensure that the organisation has the right mix of programmes, projects, products, and services to execute the organisation's strategy within its funding and resource constraints. It involves developing a systematic framework, evaluating and prioritising proposals, implementing investment appraisal, analysing and tracking investments, and monitoring performance.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q47. Explain the concept of "Customer Experience" (CX) and "User Experience" (UX). (5 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong> <strong>Customer Experience (CX)</strong> is the entirety of the interactions a customer has with an organisation and its products. It can determine how the customer feels about the organisation. CX is both objective (e.g., delivery time) and subjective (e.g., website design). <strong>User Experience (UX)</strong> looks specifically at the ease of use of the product or service and how the customer interacts with it. Both are essential to ensuring products and services deliver desired value.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q48. What is the purpose of the Business Analysis practice? (5 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong> The purpose of Business Analysis is to analyse a business or some element of it, define its associated needs, and recommend solutions to address these needs and/or solve a business problem, which must facilitate value creation for stakeholders. It enables an organisation to communicate its needs in a meaningful way, express the rationale for change, and design and describe solutions that enable value creation.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q49. Describe the purpose of the Measurement and Reporting practice. (5 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong> The purpose of Measurement and Reporting is to support good decision-making and continual improvement by decreasing levels of uncertainty. This is achieved through the collection of relevant data on various managed objects and the valid assessment of this data in an appropriate context. Managed objects include products and services, practices, teams, suppliers, and the organisation as a whole.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Q50. Explain the concept of "Continual Improvement" and its relationship with the SVS. (5 marks)</summary>
+    <div>
+      <p><strong>Model Answer:</strong> Continual Improvement is a recurring organisational activity performed at all levels to ensure that an organisation's performance continually meets stakeholders' expectations. It is one of the key components of the ITIL SVS, supporting every other component. The ITIL continual improvement model provides a structured approach, and the "Improve" value chain activity embeds continual improvement into the value chain. It is not just a practice but a culture that must be embedded into every fibre of the organisation.</p>
+    </div>
+  </details>
+</section>
+
+<!-- ============================================================ -->
+<!-- FINAL EXAM - 50 QUESTIONS -->
+<!-- ============================================================ -->
+<section id="final">
+  <div class="exam-header">
+    <h2>📋 ITSM6312 — Final Exam</h2>
+    <p>Time: 2 hours · Total Marks: 100 · Closed Book · 50 Questions</p>
+  </div>
+
+  <div class="quiz-header">
+    <span class="quiz-score" id="finalScore">Final Exam: 0 / 50</span>
+    <div>
+      <button class="green" onclick="checkFinalExam()">✅ Submit Final Exam</button>
+      <button class="secondary" onclick="resetFinalExam()">🔄 Reset</button>
+    </div>
+  </div>
+
+  <div id="finalContainer"></div>
+
+  <div style="text-align: center; margin-top: 2rem;">
+    <button class="green" onclick="checkFinalExam()" style="font-size: 1.1rem; padding: 1rem 2.5rem;">✅ Submit Final Exam</button>
+  </div>
+</section>
+
+<!-- SCORE DISPLAY -->
+<div class="score-display" id="scoreDisplay">Score: 0 / 100</div>
+
+</main>
+
+<footer>
+  <p>📘 ITSM6312 Master Study Guide · Based on ITIL 4 Foundation (AXELOS 2019)</p>
+  <p style="margin-top: 0.5rem;">© The Independent Institute of Education (Pty) Ltd 2026</p>
+  <p style="margin-top: 0.5rem; color: var(--cyan);">Good luck with your distinction! 🚀</p>
+</footer>
+
+<script>
+// ============================================================
+// MCQ QUIZ - 100 QUESTIONS
+// ============================================================
+const mcqData = [
+  { q: "What is the primary purpose of IT Service Management (ITSM)?", options: ["To fix technical problems", "To deliver value to customers through services", "To reduce IT costs", "To manage hardware inventory"], correct: 1, explanation: "ITSM is about delivering value through services." },
+  { q: "Which dimension includes culture, structure, and roles?", options: ["Information and Technology", "Partners and Suppliers", "Organisations and People", "Value Streams and Processes"], correct: 2, explanation: "Organisations and People covers culture, structure, roles, and skills." },
+  { q: "What are the two inputs to the ITIL Service Value System?", options: ["Products and Services", "Opportunity and Demand", "Governance and Practices", "Plans and Improvements"], correct: 1, explanation: "Opportunity and Demand enter the SVS from the left." },
+  { q: "Which guiding principle advises against reinventing the wheel?", options: ["Focus on Value", "Start Where You Are", "Progress Iteratively", "Keep It Simple"], correct: 1, explanation: "Start Where You Are means use what you already have." },
+  { q: "What is the difference between an Incident and a Problem?", options: ["Incidents are more serious", "Problems are caused by incidents", "Incidents are unplanned interruptions; Problems are their root causes", "There is no difference"], correct: 2, explanation: "Incidents are interruptions; Problems are the underlying causes." },
+  { q: "Which practice is responsible for restoring normal service quickly?", options: ["Problem Management", "Incident Management", "Change Control", "Service Design"], correct: 1, explanation: "Incident Management restores normal service quickly." },
+  { q: "What does the Engage value chain activity do?", options: ["Build services", "Connect with stakeholders", "Plan improvements", "Run services"], correct: 1, explanation: "Engage connects with stakeholders to understand needs." },
+  { q: "Which type of change is low-risk and pre-authorised?", options: ["Emergency change", "Normal change", "Standard change", "Major change"], correct: 2, explanation: "Standard changes are low-risk and pre-authorised." },
+  { q: "What is the purpose of the Service Desk?", options: ["To fix all technical problems", "To be the single point of contact for users", "To manage suppliers", "To design new services"], correct: 1, explanation: "The Service Desk is the single point of contact for users." },
+  { q: "Which AI advantage in ITSM allows support to be available at all times?", options: ["Cost savings", "24/7 availability", "Better predictions", "Consistent quality"], correct: 1, explanation: "AI provides 24/7 availability because it never sleeps." },
+  { q: "What is 'Value' in service management?", options: ["The cost of a service", "The perceived benefits, usefulness, and importance of something", "The number of users", "The speed of delivery"], correct: 1, explanation: "Value is the perceived benefits, usefulness, and importance of something." },
+  { q: "Which dimension includes data, hardware, and software?", options: ["Organisations and People", "Information and Technology", "Partners and Suppliers", "Value Streams and Processes"], correct: 1, explanation: "Information and Technology covers data, hardware, software, and networks." },
+  { q: "What is a 'Service Consumer'?", options: ["The person who provides the service", "The person or entity using the service", "The person who designs the service", "The person who manages the service"], correct: 1, explanation: "A Service Consumer is the person or entity using the service." },
+  { q: "What is the purpose of the 'Plan' value chain activity?", options: ["To build services", "To ensure shared understanding of vision and direction", "To connect with stakeholders", "To run services"], correct: 1, explanation: "Plan ensures shared understanding of vision, current status, and improvement direction." },
+  { q: "What is the purpose of the 'Improve' value chain activity?", options: ["To build services", "To ensure continual improvement of products, services, and practices", "To connect with stakeholders", "To run services"], correct: 1, explanation: "Improve ensures continual improvement across all value chain activities." },
+  { q: "What is a 'Service Offering'?", options: ["A formal description of one or more services", "A type of hardware", "A software licence", "A network protocol"], correct: 0, explanation: "A Service Offering is a formal description of one or more services designed to address the needs of a target consumer group." },
+  { q: "What is the purpose of the 'Engage' value chain activity?", options: ["To build services", "To provide good understanding of stakeholder needs and good relationships", "To plan improvements", "To run services"], correct: 1, explanation: "Engage provides a good understanding of stakeholder needs, transparency, and good relationships." },
+  { q: "What is 'Utility' in service management?", options: ["How the service performs", "What the service does — fit for purpose", "The cost of the service", "The speed of the service"], correct: 1, explanation: "Utility is the functionality offered by a product or service — 'what the service does'." },
+  { q: "What is 'Warranty' in service management?", options: ["What the service does", "How the service performs — fit for use", "The cost of the service", "The speed of the service"], correct: 1, explanation: "Warranty is assurance that a product or service will meet agreed requirements — 'how the service performs'." },
+  { q: "What is the purpose of the 'Obtain/Build' value chain activity?", options: ["To ensure service components are available when and where needed", "To connect with stakeholders", "To plan improvements", "To run services"], correct: 0, explanation: "Obtain/Build ensures service components are available when and where they are needed." },
+  { q: "What is the purpose of the 'Deliver & Support' value chain activity?", options: ["To ensure services are delivered and supported according to agreed specifications", "To build services", "To plan improvements", "To connect with stakeholders"], correct: 0, explanation: "Deliver & Support ensures services are delivered and supported according to agreed specifications and stakeholders' expectations." },
+  { q: "What is the purpose of the 'Design & Transition' value chain activity?", options: ["To ensure products and services meet stakeholder expectations for quality, costs, and time to market", "To build services", "To plan improvements", "To run services"], correct: 0, explanation: "Design & Transition ensures products and services continually meet stakeholder expectations." },
+  { q: "What is a 'Practice' in ITIL 4?", options: ["A set of organisational resources designed for performing work", "A type of software", "A network protocol", "A hardware component"], correct: 0, explanation: "A Practice is a set of organisational resources designed for performing work or accomplishing an objective." },
+  { q: "How many General Management Practices are there in ITIL 4?", options: ["3", "14", "17", "34"], correct: 1, explanation: "There are 14 General Management Practices." },
+  { q: "How many Service Management Practices are there in ITIL 4?", options: ["3", "14", "17", "34"], correct: 2, explanation: "There are 17 Service Management Practices." },
+  { q: "How many Technical Management Practices are there in ITIL 4?", options: ["3", "14", "17", "34"], correct: 0, explanation: "There are 3 Technical Management Practices." },
+  { q: "How many total practices are there in ITIL 4?", options: ["3", "14", "17", "34"], correct: 3, explanation: "There are 34 total practices in ITIL 4." },
+  { q: "What is the purpose of the 'Continual Improvement' practice?", options: ["To align practices and services with changing business needs", "To build services", "To manage suppliers", "To design new services"], correct: 0, explanation: "Continual Improvement aligns practices and services with changing business needs through ongoing improvement." },
+  { q: "What is the purpose of 'Information Security Management'?", options: ["To protect the information needed by the organisation", "To build services", "To manage suppliers", "To design new services"], correct: 0, explanation: "Information Security Management protects the information needed by the organisation to conduct its business." },
+  { q: "What is the purpose of 'Knowledge Management'?", options: ["To maintain and improve the use of information and knowledge", "To build services", "To manage suppliers", "To design new services"], correct: 0, explanation: "Knowledge Management maintains and improves the effective, efficient, and convenient use of information and knowledge." },
+  { q: "What is the purpose of 'Project Management'?", options: ["To ensure all projects are successfully delivered", "To build services", "To manage suppliers", "To design new services"], correct: 0, explanation: "Project Management ensures all projects in the organisation are successfully delivered." },
+  { q: "What is the purpose of 'Risk Management'?", options: ["To ensure the organisation understands and effectively handles risks", "To build services", "To manage suppliers", "To design new services"], correct: 0, explanation: "Risk Management ensures the organisation understands and effectively handles risks." },
+  { q: "What is the purpose of 'Supplier Management'?", options: ["To ensure suppliers and their performance are managed appropriately", "To build services", "To design new services", "To plan improvements"], correct: 0, explanation: "Supplier Management ensures the organisation's suppliers and their performances are managed appropriately." },
+  { q: "What is the purpose of 'Availability Management'?", options: ["To ensure services deliver agreed levels of availability", "To build services", "To manage suppliers", "To design new services"], correct: 0, explanation: "Availability Management ensures services deliver agreed levels of availability to meet customer needs." },
+  { q: "What is the purpose of 'Capacity and Performance Management'?", options: ["To ensure services achieve agreed and expected performance", "To build services", "To manage suppliers", "To design new services"], correct: 0, explanation: "Capacity and Performance Management ensures services achieve agreed and expected performance levels." },
+  { q: "What is the purpose of 'Change Control'?", options: ["To maximise successful changes by assessing risks and authorising", "To build services", "To manage suppliers", "To design new services"], correct: 0, explanation: "Change Control maximises successful service and product changes by assessing risks and authorising changes." },
+  { q: "What is the purpose of 'IT Asset Management'?", options: ["To plan and manage the full lifecycle of all IT assets", "To build services", "To manage suppliers", "To design new services"], correct: 0, explanation: "IT Asset Management plans and manages the full lifecycle of all IT assets." },
+  { q: "What is the purpose of 'Monitoring and Event Management'?", options: ["To systematically observe services and record events", "To build services", "To manage suppliers", "To design new services"], correct: 0, explanation: "Monitoring and Event Management systematically observes services and records selected changes of state as events." },
+  { q: "What is the purpose of 'Problem Management'?", options: ["To reduce the likelihood and impact of incidents by finding root causes", "To build services", "To manage suppliers", "To design new services"], correct: 0, explanation: "Problem Management reduces the likelihood and impact of incidents by identifying actual and potential causes." },
+  { q: "What is the purpose of 'Release Management'?", options: ["To make new and changed services available for use", "To build services", "To manage suppliers", "To design new services"], correct: 0, explanation: "Release Management makes new and changed services and features available for use." },
+  { q: "What is the purpose of 'Service Catalogue Management'?", options: ["To provide a single source of consistent information on services", "To build services", "To manage suppliers", "To design new services"], correct: 0, explanation: "Service Catalogue Management provides a single source of consistent information on all services and service offerings." },
+  { q: "What is the purpose of 'Service Configuration Management'?", options: ["To ensure accurate information about configurations is available", "To build services", "To manage suppliers", "To design new services"], correct: 0, explanation: "Service Configuration Management ensures accurate and reliable information about the configuration of services is available." },
+  { q: "What is the purpose of 'Service Continuity Management'?", options: ["To ensure availability and performance in case of a disaster", "To build services", "To manage suppliers", "To design new services"], correct: 0, explanation: "Service Continuity Management ensures availability and performance are maintained in case of a disaster." },
+  { q: "What is the purpose of 'Service Design'?", options: ["To design products and services that are fit for purpose and use", "To build services", "To manage suppliers", "To plan improvements"], correct: 0, explanation: "Service Design designs products and services that are fit for purpose, fit for use, and deliverable." },
+  { q: "What is the purpose of 'Service Level Management'?", options: ["To set clear business-based targets for service levels", "To build services", "To manage suppliers", "To design new services"], correct: 0, explanation: "Service Level Management sets clear business-based targets for service levels and ensures delivery is properly assessed." },
+  { q: "What is the purpose of 'Service Request Management'?", options: ["To handle pre-defined, user-initiated service requests", "To build services", "To manage suppliers", "To design new services"], correct: 0, explanation: "Service Request Management handles all pre-defined, user-initiated service requests in an effective and user-friendly manner." },
+  { q: "What is the purpose of 'Service Validation and Testing'?", options: ["To ensure new/changed products and services meet defined requirements", "To build services", "To manage suppliers", "To design new services"], correct: 0, explanation: "Service Validation and Testing ensures new or changed products and services meet defined requirements." },
+  { q: "What is the purpose of 'Deployment Management'?", options: ["To move new/changed components to live environments", "To build services", "To manage suppliers", "To design new services"], correct: 0, explanation: "Deployment Management moves new or changed hardware, software, documentation, processes, or any other component to live environments." },
+  { q: "What is the purpose of 'Infrastructure and Platform Management'?", options: ["To oversee the infrastructure and platforms used", "To build services", "To manage suppliers", "To design new services"], correct: 0, explanation: "Infrastructure and Platform Management oversees the infrastructure and platforms used by an organisation." },
+  { q: "What is the purpose of 'Software Development and Management'?", options: ["To ensure applications meet stakeholder needs", "To build services", "To manage suppliers", "To design new services"], correct: 0, explanation: "Software Development and Management ensures applications meet internal and external stakeholder needs." },
+  { q: "What is the purpose of 'Architecture Management'?", options: ["To provide understanding of all elements of the organisation and how they interrelate", "To build services", "To manage suppliers", "To design new services"], correct: 0, explanation: "Architecture Management provides understanding of all elements that make up an organisation and how they interrelate." },
+  { q: "What is the purpose of 'Measurement and Reporting'?", options: ["To support good decision-making by decreasing uncertainty", "To build services", "To manage suppliers", "To design new services"], correct: 0, explanation: "Measurement and Reporting supports good decision-making and continual improvement by decreasing levels of uncertainty." },
+  { q: "What is the purpose of 'Organisational Change Management'?", options: ["To ensure changes are smoothly and successfully implemented", "To build services", "To manage suppliers", "To design new services"], correct: 0, explanation: "Organisational Change Management ensures changes are smoothly and successfully implemented by managing the human aspects." },
+  { q: "What is the purpose of 'Portfolio Management'?", options: ["To ensure the right mix of programmes, projects, products, and services", "To build services", "To manage suppliers", "To design new services"], correct: 0, explanation: "Portfolio Management ensures the organisation has the right mix of programmes, projects, products, and services to execute its strategy." },
+  { q: "What is the purpose of 'Relationship Management'?", options: ["To establish and nurture links with stakeholders", "To build services", "To manage suppliers", "To design new services"], correct: 0, explanation: "Relationship Management establishes and nurtures the links between the organisation and its stakeholders." },
+  { q: "What is the purpose of 'Service Financial Management'?", options: ["To support strategies and plans financially", "To build services", "To manage suppliers", "To design new services"], correct: 0, explanation: "Service Financial Management supports the organisation's strategies and plans by ensuring financial resources are used effectively." },
+  { q: "What is the purpose of 'Strategy Management'?", options: ["To formulate goals and adopt courses of action", "To build services", "To manage suppliers", "To design new services"], correct: 0, explanation: "Strategy Management formulates the goals of the organisation and adopts courses of action and allocation of resources." },
+  { q: "What is the purpose of 'Workforce and Talent Management'?", options: ["To ensure the right people with the right skills in the right roles", "To build services", "To manage suppliers", "To design new services"], correct: 0, explanation: "Workforce and Talent Management ensures the organisation has the right people with the appropriate skills in the correct roles." },
+  { q: "What is the purpose of 'Business Analysis'?", options: ["To analyse business needs and recommend solutions", "To build services", "To manage suppliers", "To design new services"], correct: 0, explanation: "Business Analysis analyses a business or element of it, defines needs, and recommends solutions to address them." },
+  { q: "What is the 'Watermelon SLA' effect?", options: ["An SLA that appears green but is actually red", "An SLA that is too expensive", "An SLA that is too long", "An SLA that has no metrics"], correct: 0, explanation: "The Watermelon SLA effect describes an SLA that appears successful (green) but customers are actually dissatisfied (red)." },
+  { q: "What is a 'Known Error'?", options: ["A problem that has been analysed but not resolved", "A type of incident", "A standard change", "A service request"], correct: 0, explanation: "A Known Error is a problem that has been analysed but has not been resolved." },
+  { q: "What is a 'Workaround'?", options: ["A solution that reduces or eliminates the impact of an incident when full resolution is not available", "A permanent fix", "A type of change", "A service request"], correct: 0, explanation: "A Workaround is a solution that reduces or eliminates the impact of an incident or problem for which a full resolution is not yet available." },
+  { q: "What is 'Organisational Agility'?", options: ["The ability to move and adapt quickly to support internal changes", "The ability to resist change", "The ability to reduce costs", "The ability to hire more staff"], correct: 0, explanation: "Organisational agility is the ability to move and adapt quickly, flexibly, and decisively to support internal changes." },
+  { q: "What is 'Organisational Resilience'?", options: ["The ability to anticipate, prepare for, respond to, and adapt to disruptions", "The ability to resist change", "The ability to reduce costs", "The ability to hire more staff"], correct: 0, explanation: "Organisational resilience is the ability to anticipate, prepare for, respond to, and adapt to both incremental changes and sudden disruptions." },
+  { q: "What is the 'Theory of Constraints'?", options: ["The weakest link in the value chain determines the flow and throughput of the system", "All constraints must be eliminated", "Constraints are always bad", "Constraints should be ignored"], correct: 0, explanation: "The Theory of Constraints states that the weakest link in the value chain determines the flow and throughput of the system." },
+  { q: "What is 'Design Thinking'?", options: ["A practical and human-centred approach that accelerates innovation", "A type of software", "A network protocol", "A hardware component"], correct: 0, explanation: "Design Thinking is a practical and human-centred approach used to solve complex problems and find creative solutions." },
+  { q: "What is 'Customer Experience' (CX)?", options: ["The entirety of interactions a customer has with an organisation", "The cost of a service", "The speed of delivery", "The number of users"], correct: 0, explanation: "Customer Experience (CX) is the entirety of the interactions a customer has with an organisation and its products." },
+  { q: "What is 'User Experience' (UX)?", options: ["The ease of use of a product or service", "The cost of a service", "The speed of delivery", "The number of users"], correct: 0, explanation: "User Experience (UX) looks specifically at the ease of use of the product or service and how the customer interacts with it." },
+  { q: "What is a 'Minimum Viable Product' (MVP)?", options: ["A version of the final product that allows maximum validated learning with least effort", "A product with no features", "A product that is too expensive", "A product that is too slow"], correct: 0, explanation: "An MVP is a version of the final product which allows the maximum amount of validated learning with the least effort." },
+  { q: "What is the purpose of 'Cloud Computing' in ITSM?", options: ["To provide on-demand network access to a shared pool of configurable computing resources", "To replace all on-premises infrastructure", "To reduce IT staff", "To eliminate all risks"], correct: 0, explanation: "Cloud computing enables on-demand network access to a shared pool of configurable computing resources." },
+  { q: "What is 'SaaS'?", options: ["Software as a Service", "System as a Service", "Security as a Service", "Storage as a Service"], correct: 0, explanation: "SaaS stands for Software as a Service." },
+  { q: "What is 'PaaS'?", options: ["Platform as a Service", "Product as a Service", "Process as a Service", "People as a Service"], correct: 0, explanation: "PaaS stands for Platform as a Service." },
+  { q: "What is 'IaaS'?", options: ["Infrastructure as a Service", "Information as a Service", "Integration as a Service", "Innovation as a Service"], correct: 0, explanation: "IaaS stands for Infrastructure as a Service." },
+  { q: "What is a 'Private Cloud'?", options: ["Cloud infrastructure used exclusively by a specific organisation", "Cloud infrastructure open to the public", "Cloud infrastructure shared by multiple organisations", "Cloud infrastructure that is free"], correct: 0, explanation: "A Private Cloud is a cloud infrastructure used exclusively by a specific organisation." },
+  { q: "What is a 'Public Cloud'?", options: ["Cloud infrastructure provisioned for open use", "Cloud infrastructure used by one organisation", "Cloud infrastructure that is free", "Cloud infrastructure that is on-premises"], correct: 0, explanation: "A Public Cloud is cloud infrastructure provisioned for open use and may be owned by any type of organisation." },
+  { q: "What is a 'Hybrid Cloud'?", options: ["A composition of two or more distinct cloud infrastructures", "A cloud that is free", "A cloud that is on-premises only", "A cloud that is public only"], correct: 0, explanation: "A Hybrid Cloud is a composition of two or more distinct cloud infrastructures (private, community, or public)." },
+  { q: "What is the purpose of 'DevOps'?", options: ["To improve the flow of value to customers through close collaboration", "To replace ITIL", "To reduce IT staff", "To eliminate all risks"], correct: 0, explanation: "DevOps aims to improve the flow of value to customers through close collaboration between software development and technical operations." },
+  { q: "What does 'CALMS' stand for in DevOps?", options: ["Culture, Automation, Lean, Measurement, Sharing", "Cost, Agility, Lean, Management, Security", "Cloud, Automation, Lean, Monitoring, Service", "Culture, Agile, Lean, Management, Sharing"], correct: 0, explanation: "CALMS stands for Culture, Automation, Lean, Measurement, and Sharing." },
+  { q: "What is the purpose of 'Agile' in ITSM?", options: ["To deliver incremental changes while responding to evolving needs", "To replace ITIL", "To reduce IT staff", "To eliminate all risks"], correct: 0, explanation: "Agile focuses on delivering incremental changes to products while responding to changing or evolving needs." },
+  { q: "What is 'Kanban'?", options: ["A method for visualizing work and managing work in progress", "A type of software", "A network protocol", "A hardware component"], correct: 0, explanation: "Kanban is a method for visualizing work, identifying potential blockages, and managing work in progress." },
+  { q: "What is 'Lean'?", options: ["An approach that focuses on improving workflows by maximizing value through elimination of waste", "A type of software", "A network protocol", "A hardware component"], correct: 0, explanation: "Lean focuses on improving workflows by maximizing value through the elimination of waste." },
+  { q: "What is a 'Continual Improvement Register' (CIR)?", options: ["A database or structured document to track improvement ideas", "A type of software", "A network protocol", "A hardware component"], correct: 0, explanation: "A CIR is a database or structured document used to track and manage improvement ideas from identification through to final action." },
+  { q: "What is the purpose of 'Organisational Change Management'?", options: ["To manage the human aspects of changes", "To manage technology changes", "To manage supplier changes", "To manage financial changes"], correct: 0, explanation: "Organisational Change Management manages the human aspects of changes to ensure they are smoothly and successfully implemented." },
+  { q: "What is a 'CSF'?", options: ["Critical Success Factor — a necessary precondition for achieving intended results", "Customer Service Function", "Central Support Facility", "Cloud Service Framework"], correct: 0, explanation: "A Critical Success Factor (CSF) is a necessary precondition for the achievement of intended results." },
+  { q: "What is a 'KPI'?", options: ["Key Performance Indicator — an important metric used to evaluate success", "Key Process Integration", "Knowledge Performance Index", "Key Product Innovation"], correct: 0, explanation: "A Key Performance Indicator (KPI) is an important metric used to evaluate the success in meeting an objective." },
+  { q: "What is the purpose of 'Service Financial Management'?", options: ["To manage budgeting, costing, accounting, and charging", "To manage suppliers", "To manage risks", "To manage changes"], correct: 0, explanation: "Service Financial Management manages budgeting, costing, accounting, and charging for the activities of an organisation." },
+  { q: "What is 'Charging' in Service Financial Management?", options: ["Formally invoicing service consumers for services provided", "Managing budgets", "Tracking costs", "Managing suppliers"], correct: 0, explanation: "Charging is the activity required to formally invoice service consumers for the services provided to them." },
+  { q: "What is the purpose of 'Strategy Management'?", options: ["To formulate goals and adopt courses of action", "To manage suppliers", "To manage risks", "To manage changes"], correct: 0, explanation: "Strategy Management formulates the goals of the organisation and adopts the courses of action and allocation of resources necessary for achieving those goals." },
+  { q: "What is 'Architecture Management'?", options: ["Providing understanding of all elements of the organisation and how they interrelate", "Managing servers", "Managing networks", "Managing databases"], correct: 0, explanation: "Architecture Management provides an understanding of all the different elements that make up an organisation and how those elements interrelate." },
+  { q: "What is 'Environmental Architecture'?", options: ["Describing external factors impacting the organisation", "Managing servers", "Managing networks", "Managing databases"], correct: 0, explanation: "Environmental Architecture describes the external factors impacting the organisation and the drivers for change." },
+  { q: "What is the purpose of 'Measurement and Reporting'?", options: ["To support good decision-making by decreasing uncertainty", "To manage suppliers", "To manage risks", "To manage changes"], correct: 0, explanation: "Measurement and Reporting supports good decision-making and continual improvement by decreasing levels of uncertainty." },
+  { q: "What is 'Goodhart's Law'?", options: ["When a measure becomes a target, it ceases to be a good measure", "All measures are good", "Targets are always bad", "Measures should never be used"], correct: 0, explanation: "Goodhart's Law states: 'When a measure becomes a target, it ceases to be a good measure.'" },
+  { q: "What is the purpose of 'Risk Management'?", options: ["To ensure the organisation understands and effectively handles risks", "To manage suppliers", "To manage changes", "To design new services"], correct: 0, explanation: "Risk Management ensures the organisation understands and effectively handles risks." },
+  { q: "What is the purpose of 'Supplier Management'?", options: ["To ensure suppliers and their performance are managed appropriately", "To manage risks", "To manage changes", "To design new services"], correct: 0, explanation: "Supplier Management ensures the organisation's suppliers and their performances are managed appropriately." },
+  { q: "What is 'Insourcing'?", options: ["Products or services developed and delivered internally", "Products or services from external suppliers", "Products or services from multiple suppliers", "Products or services from a single supplier"], correct: 0, explanation: "Insourcing means the products or services are developed and/or delivered internally by the organisation." },
+  { q: "What is 'Outsourcing'?", options: ["Having external suppliers provide products and services previously provided internally", "Developing products internally", "Using multiple suppliers", "Using a single supplier"], correct: 0, explanation: "Outsourcing is the process of having external suppliers provide products and services that were previously provided internally." },
+  { q: "What is 'Multi-sourcing'?", options: ["Procurement of a product or service from more than one independent supplier", "Procurement from a single supplier", "Developing products internally", "Using no suppliers"], correct: 0, explanation: "Multi-sourcing is the procurement of a product or service from more than one independent supplier." },
+  { q: "What is the purpose of 'Service Integration and Management'?", options: ["To coordinate or orchestrate all suppliers involved in development and delivery", "To manage internal staff", "To manage risks", "To design new services"], correct: 0, explanation: "Service Integration and Management is responsible for coordinating or orchestrating all the suppliers involved in the development and delivery of products and services." },
+  { q: "What is the purpose of 'Service Design'?", options: ["To design products and services that are fit for purpose and use", "To manage suppliers", "To manage risks", "To manage changes"], correct: 0, explanation: "Service Design designs products and services that are fit for purpose, fit for use, and that can be delivered by the organisation and its ecosystem." },
+  { q: "What is the purpose of 'Lean UX'?", options: ["To focus on obtaining feedback as early as possible", "To reduce costs", "To increase speed", "To manage suppliers"], correct: 0, explanation: "Lean UX focuses on obtaining feedback as early as possible so that it can be used to make quick decisions." },
+  { q: "What is the purpose of 'Service Continuity Management'?", options: ["To ensure availability and performance are maintained in case of a disaster", "To manage suppliers", "To manage risks", "To design new services"], correct: 0, explanation: "Service Continuity Management ensures that the availability and performance of a service are maintained at sufficient levels in case of a disaster." },
+  { q: "What is a 'Recovery Time Objective' (RTO)?", options: ["The maximum acceptable period of time following a service disruption", "The point to which information must be restored", "The cost of recovery", "The speed of recovery"], correct: 0, explanation: "RTO is the maximum acceptable period of time following a service disruption that can elapse before the lack of business functionality severely impacts the organisation." },
+  { q: "What is a 'Recovery Point Objective' (RPO)?", options: ["The point to which information must be restored to enable the activity to operate on resumption", "The maximum acceptable period of time following a service disruption", "The cost of recovery", "The speed of recovery"], correct: 0, explanation: "RPO is the point to which information used by an activity must be restored to enable the activity to operate on resumption." },
+  { q: "What is the purpose of 'Service Validation and Testing'?", options: ["To ensure new/changed products and services meet defined requirements", "To manage suppliers", "To manage risks", "To design new services"], correct: 0, explanation: "Service Validation and Testing ensures that new or changed products and services meet defined requirements." },
+  { q: "What is 'User Acceptance Testing' (UAT)?", options: ["The test performed by users of a new or changed system to approve a release", "A test performed by developers", "A test performed by the service desk", "A test performed by management"], correct: 0, explanation: "User Acceptance Testing (UAT) is the test performed by users of a new or changed system to approve a release." },
+  { q: "What is the purpose of 'Deployment Management'?", options: ["To move new/changed components to live environments", "To manage suppliers", "To manage risks", "To design new services"], correct: 0, explanation: "Deployment Management moves new or changed hardware, software, documentation, processes, or any other component to live environments." },
+  { q: "What is 'Phased Deployment'?", options: ["Deploying new/changed components to just part of the production environment at a time", "Deploying all components at once", "Deploying components in a controlled repository", "Deploying components automatically"], correct: 0, explanation: "Phased Deployment deploys new or changed components to just part of the production environment at a time." },
+  { q: "What is 'Big Bang Deployment'?", options: ["Deploying new/changed components to all targets at the same time", "Deploying components gradually", "Deploying components in a controlled repository", "Deploying components automatically"], correct: 0, explanation: "Big Bang Deployment deploys new or changed components to all targets at the same time." },
+  { q: "What is 'Pull Deployment'?", options: ["Making software available in a controlled repository for users to download when they choose", "Deploying all components at once", "Deploying components gradually", "Deploying components automatically"], correct: 0, explanation: "Pull Deployment makes new or changed software available in a controlled repository, and users download the software when they choose." },
+  { q: "What is 'Continuous Delivery'?", options: ["Components are integrated, tested, and deployed when needed", "Deploying all components at once", "Deploying components gradually", "Deploying components manually"], correct: 0, explanation: "Continuous Delivery integrates, tests, and deploys components when they are needed, providing frequent opportunities for customer feedback loops." },
+  { q: "What is the purpose of 'Software Development and Management'?", options: ["To ensure applications meet stakeholder needs", "To manage suppliers", "To manage risks", "To design new services"], correct: 0, explanation: "Software Development and Management ensures that applications meet internal and external stakeholder needs in terms of functionality, reliability, maintainability, compliance, and auditability." },
+  { q: "What is 'Waterfall' methodology?", options: ["A development approach that is linear and sequential with distinct objectives for each phase", "An iterative development approach", "A flexible development approach", "A collaborative development approach"], correct: 0, explanation: "Waterfall is a development approach that is linear and sequential with distinct objectives for each phase of development." }
+];
+
+let mcqScore = 0;
+let mcqAnswered = new Set();
+
+function renderMCQ() {
+  const container = document.getElementById('mcqContainer');
+  container.innerHTML = mcqData.map((item, i) => `
+    <div class="question" id="mcq-q-${i}">
+      <p class="q-text">${i + 1}. ${item.q}</p>
+      ${item.options.map((opt, j) => `
+        <label class="option" id="mcq-opt-${i}-${j}" onclick="selectMCQ(${i}, ${j})">
+          <input type="radio" name="mcq${i}" value="${j}"> ${String.fromCharCode(65 + j)}) ${opt}
+        </label>
+      `).join('')}
+      <div class="feedback" id="mcq-fb-${i}"></div>
+    </div>
+  `).join('');
+}
+
+function selectMCQ(qIndex, optIndex) {
+  const item = mcqData[qIndex];
+  const allOpts = document.querySelectorAll(`[id^="mcq-opt-${qIndex}-"]`);
+  const fb = document.getElementById(`mcq-fb-${qIndex}`);
+  allOpts.forEach(o => { o.classList.remove('correct', 'wrong'); o.querySelector('input').checked = false; });
+  const selected = document.getElementById(`mcq-opt-${qIndex}-${optIndex}`);
+  selected.querySelector('input').checked = true;
+  if (optIndex === item.correct) {
+    selected.classList.add('correct');
+    fb.className = 'feedback correct show';
+    fb.textContent = '✅ Correct! ' + item.explanation;
+    if (!mcqAnswered.has(qIndex)) { mcqScore++; mcqAnswered.add(qIndex); }
+  } else {
+    selected.classList.add('wrong');
+    document.getElementById(`mcq-opt-${qIndex}-${item.correct}`).classList.add('correct');
+    fb.className = 'feedback wrong show';
+    fb.textContent = '❌ Incorrect. ' + item.explanation;
+  }
+  document.getElementById('mcqScore').textContent = `Score: ${mcqScore} / 100`;
+}
+
+function resetMCQ() {
+  mcqScore = 0;
+  mcqAnswered.clear();
+  renderMCQ();
+  document.getElementById('mcqScore').textContent = `Score: 0 / 100`;
+}
+
+// ============================================================
+// FINAL EXAM - 50 QUESTIONS
+// ============================================================
+const finalExamData = [
+  { q: "What is the primary purpose of ITSM?", options: ["Fix computers", "Deliver value through services", "Reduce costs", "Manage inventory"], correct: 1 },
+  { q: "Which dimension includes culture and structure?", options: ["Info & Tech", "Partners", "Organisations & People", "Value Streams"], correct: 2 },
+  { q: "Inputs to the SVS are:", options: ["Products", "Opportunity & Demand", "Governance", "Plans"], correct: 1 },
+  { q: "Which principle advises not reinventing the wheel?", options: ["Focus on Value", "Start Where You Are", "Progress Iteratively", "Keep It Simple"], correct: 1 },
+  { q: "Difference between Incident and Problem?", options: ["Incidents are worse", "Problems cause incidents", "Incidents are interruptions; Problems are causes", "No difference"], correct: 2 },
+  { q: "Restores normal service quickly:", options: ["Problem Mgmt", "Incident Mgmt", "Change Control", "Service Design"], correct: 1 },
+  { q: "Engage value chain activity does:", options: ["Build services", "Connect with stakeholders", "Plan", "Run services"], correct: 1 },
+  { q: "Low-risk pre-authorised change:", options: ["Emergency", "Normal", "Standard", "Major"], correct: 2 },
+  { q: "Service Desk purpose:", options: ["Fix all problems", "Single point of contact", "Manage suppliers", "Design services"], correct: 1 },
+  { q: "AI advantage for 24/7:", options: ["Cost savings", "24/7 availability", "Predictions", "Consistency"], correct: 1 },
+  { q: "Value is:", options: ["Cost", "Perceived benefits, usefulness, and importance", "Users", "Speed"], correct: 1 },
+  { q: "Data, hardware, software dimension:", options: ["People", "Info & Tech", "Partners", "Value Streams"], correct: 1 },
+  { q: "Service Consumer is:", options: ["Provider", "User of service", "Designer", "Manager"], correct: 1 },
+  { q: "Plan activity ensures:", options: ["Build", "Shared understanding of vision", "Connect", "Run"], correct: 1 },
+  { q: "Improve activity ensures:", options: ["Build", "Continual improvement", "Connect", "Run"], correct: 1 },
+  { q: "Service Offering is:", options: ["Formal description of services", "Hardware", "Licence", "Protocol"], correct: 0 },
+  { q: "Engage activity provides:", options: ["Build", "Understanding of stakeholder needs", "Plan", "Run"], correct: 1 },
+  { q: "Utility is:", options: ["How it performs", "What it does — fit for purpose", "Cost", "Speed"], correct: 1 },
+  { q: "Warranty is:", options: ["What it does", "How it performs — fit for use", "Cost", "Speed"], correct: 1 },
+  { q: "Obtain/Build ensures:", options: ["Components available when needed", "Connect", "Plan", "Run"], correct: 0 },
+  { q: "Deliver & Support ensures:", options: ["Services delivered per specs", "Build", "Plan", "Connect"], correct: 0 },
+  { q: "Design & Transition ensures:", options: ["Meet stakeholder expectations for quality, cost, time", "Build", "Plan", "Run"], correct: 0 },
+  { q: "Practice is:", options: ["Set of resources for work", "Software", "Protocol", "Hardware"], correct: 0 },
+  { q: "Number of General Mgmt Practices:", options: ["3", "14", "17", "34"], correct: 1 },
+  { q: "Number of Service Mgmt Practices:", options: ["3", "14", "17", "34"], correct: 2 },
+  { q: "Number of Technical Mgmt Practices:", options: ["3", "14", "17", "34"], correct: 0 },
+  { q: "Total practices in ITIL 4:", options: ["3", "14", "17", "34"], correct: 3 },
+  { q: "Continual Improvement aligns:", options: ["Practices & services with changing needs", "Build", "Suppliers", "Design"], correct: 0 },
+  { q: "Info Security protects:", options: ["Information", "Build", "Suppliers", "Design"], correct: 0 },
+  { q: "Knowledge Mgmt improves:", options: ["Use of info & knowledge", "Build", "Suppliers", "Design"], correct: 0 },
+  { q: "Project Mgmt ensures:", options: ["All projects delivered", "Build", "Suppliers", "Design"], correct: 0 },
+  { q: "Risk Mgmt ensures:", options: ["Risks handled", "Build", "Suppliers", "Design"], correct: 0 },
+  { q: "Supplier Mgmt ensures:", options: ["Supplier performance managed", "Build", "Design", "Plan"], correct: 0 },
+  { q: "Availability Mgmt ensures:", options: ["Agreed availability levels", "Build", "Suppliers", "Design"], correct: 0 },
+  { q: "Capacity Mgmt ensures:", options: ["Agreed performance levels", "Build", "Suppliers", "Design"], correct: 0 },
+  { q: "Change Control maximises:", options: ["Successful changes", "Build", "Suppliers", "Design"], correct: 0 },
+  { q: "IT Asset Mgmt manages:", options: ["Full lifecycle of IT assets", "Build", "Suppliers", "Design"], correct: 0 },
+  { q: "Monitoring observes:", options: ["Services and components", "Build", "Suppliers", "Design"], correct: 0 },
+  { q: "Problem Mgmt reduces:", options: ["Likelihood and impact of incidents", "Build", "Suppliers", "Design"], correct: 0 },
+  { q: "Release Mgmt makes:", options: ["Services available for use", "Build", "Suppliers", "Design"], correct: 0 },
+  { q: "Service Catalogue provides:", options: ["Single source of service info", "Build", "Suppliers", "Design"], correct: 0 },
+  { q: "Service Config Mgmt ensures:", options: ["Accurate config info", "Build", "Suppliers", "Design"], correct: 0 },
+  { q: "Service Continuity ensures:", options: ["Availability in disaster", "Build", "Suppliers", "Design"], correct: 0 },
+  { q: "Service Design designs:", options: ["Fit for purpose & use", "Build", "Suppliers", "Plan"], correct: 0 },
+  { q: "Service Level Mgmt sets:", options: ["Business-based targets", "Build", "Suppliers", "Design"], correct: 0 },
+  { q: "Service Request Mgmt handles:", options: ["Pre-defined user requests", "Build", "Suppliers", "Design"], correct: 0 },
+  { q: "Service Validation ensures:", options: ["Meets defined requirements", "Build", "Suppliers", "Design"], correct: 0 },
+  { q: "Deployment Mgmt moves:", options: ["Components to live", "Build", "Suppliers", "Design"], correct: 0 },
+  { q: "Infrastructure Mgmt oversees:", options: ["Infrastructure and platforms", "Build", "Suppliers", "Design"], correct: 0 },
+  { q: "Software Dev ensures:", options: ["Apps meet stakeholder needs", "Build", "Suppliers", "Design"], correct: 0 }
+];
+
+let finalScore = 0;
+let finalAnswered = new Set();
+
+function renderFinalExam() {
+  const container = document.getElementById('finalContainer');
+  container.innerHTML = finalExamData.map((item, i) => `
+    <div class="question" id="final-q-${i}">
+      <p class="q-text">${i + 1}. ${item.q} <span class="marks">2 marks</span></p>
+      ${item.options.map((opt, j) => `
+        <label class="option" id="final-opt-${i}-${j}" onclick="selectFinal(${i}, ${j})">
+          <input type="radio" name="final${i}" value="${j}"> ${String.fromCharCode(65 + j)}) ${opt}
+        </label>
+      `).join('')}
+      <div class="feedback" id="final-fb-${i}"></div>
+    </div>
+  `).join('');
+}
+
+function selectFinal(qIndex, optIndex) {
+  const item = finalExamData[qIndex];
+  const allOpts = document.querySelectorAll(`[id^="final-opt-${qIndex}-"]`);
+  const fb = document.getElementById(`final-fb-${qIndex}`);
+  allOpts.forEach(o => { o.classList.remove('correct', 'wrong'); o.querySelector('input').checked = false; });
+  const selected = document.getElementById(`final-opt-${qIndex}-${optIndex}`);
+  selected.querySelector('input').checked = true;
+  if (optIndex === item.correct) {
+    selected.classList.add('correct');
+    fb.className = 'feedback correct show';
+    fb.textContent = '✅ Correct!';
+    if (!finalAnswered.has(qIndex)) { finalScore += 2; finalAnswered.add(qIndex); }
+  } else {
+    selected.classList.add('wrong');
+    document.getElementById(`final-opt-${qIndex}-${item.correct}`).classList.add('correct');
+    fb.className = 'feedback wrong show';
+    fb.textContent = '❌ Incorrect.';
+  }
+  document.getElementById('finalScore').textContent = `Final Exam: ${finalScore} / 100`;
+}
+
+function checkFinalExam() {
+  alert(`Final Exam Score: ${finalScore} / 100\n\n${finalScore >= 75 ? '🎉 Distinction!' : finalScore >= 50 ? '✅ Pass' : '⚠️ Keep studying!'}`);
+}
+
+function resetFinalExam() {
+  finalScore = 0;
+  finalAnswered.clear();
+  renderFinalExam();
+  document.getElementById('finalScore').textContent = `Final Exam: 0 / 50`;
+}
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Initialize
+renderMCQ();
+renderFinalExam();
+</script>
+
+</body>
+</html>
